@@ -1,10 +1,6 @@
-// Base de datos simulada del estudiante
-const USUARIO_VALIDO = {
-    matricula: "2025452046",
-    password: "1123"
-};
+// Base de datos estática
+const USUARIO_VALIDO = { matricula: "2025452046", password: "456" };
 
-// Tus 7 materias con los docentes, calificaciones y grupos exactos de tu imagen
 const MATERIAS_DATA = [
     { num: 1, docente: "GARDUÑO FLORES FRANCISCO ADRIÁN", materia: "FUNDAMENTOS DE PROGRAMACIÓN", p1: 70, p2: 70, p3: 95, grupo: "1ISC21" },
     { num: 2, docente: "RAMIREZ HIDALGO JUAN ALBERTO", materia: "ÁLGEBRA LINEAL", p1: 71, p2: 86, p3: 95, grupo: "2ISC11" },
@@ -15,91 +11,86 @@ const MATERIAS_DATA = [
     { num: 7, docente: "SOLIS PEREZ SHARON", materia: "QUÍMICA", p1: 95, p2: 95, p3: 85, grupo: "2ISC11" }
 ];
 
-const loginForm = document.getElementById('login-form');
-const loginPageContainer = document.getElementById('login-page-container');
-const dashboardContainer = document.getElementById('dashboard-container');
-const loginError = document.getElementById('login-error');
-const gradesTableBody = document.getElementById('grades-table-body');
-const logoutBtn = document.getElementById('logout-btn');
+// Login
+document.getElementById('login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const mat = document.getElementById('matricula').value.trim();
+    const pass = document.getElementById('password').value;
 
-const btnReportesMain = document.getElementById('btn-reportes-main');
-const reportesSubmenu = document.getElementById('reportes-submenu');
-
-// Iniciar sesión
-loginForm.addEventListener('submit', function(e) {
-    e.preventDefault(); 
-    const matriculaIngresada = document.getElementById('matricula').value.trim();
-    const passwordIngresada = document.getElementById('password').value;
-
-    if (matriculaIngresada === USUARIO_VALIDO.matricula && passwordIngresada === USUARIO_VALIDO.password) {
-        loginPageContainer.classList.add('hidden');
-        dashboardContainer.classList.remove('hidden');
+    if (mat === USUARIO_VALIDO.matricula && pass === USUARIO_VALIDO.password) {
+        document.getElementById('login-page-container').classList.add('hidden');
+        document.getElementById('dashboard-container').classList.remove('hidden');
         
-        // Comportamiento inicial correcto: abrir menú de reportes y cargar parciales
-        reportesSubmenu.classList.remove('hidden');
-        activarContenidoCentral('tab-parciales');
-        cargarCalificaciones();
+        // Carga por defecto parciales
+        document.getElementById('reportes-submenu').classList.remove('hidden');
+        resetearEstilosMenu();
+        document.querySelector('[onclick="conmutarReportes()"]').classList.add('active');
+        document.getElementById('sub-item-parciales').classList.add('active');
+        
+        mostrarSeccionContenido('tab-parciales');
+        construirTablaGrd();
     } else {
-        loginError.textContent = "Matrícula o contraseña incorrectas. Inténtalo de nuevo.";
+        document.getElementById('login-error').textContent = "Matrícula o contraseña incorrectas. Inténtalo de nuevo.";
     }
 });
 
-// INTERACCIÓN DE BOTONES PRINCIPALES (Registro, Reportes, Usuario)
-const mainButtons = document.querySelectorAll('.sidebar-menu > .menu-btn:not(#logout-btn)');
-const submenuItems = document.querySelectorAll('.submenu-content .submenu-item');
-
-mainButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        mainButtons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        
-        if (this.id === 'btn-reportes-main') {
-            // Alterna la visibilidad del submenú
-            reportesSubmenu.classList.toggle('hidden');
-            
-            // Si se abrió, activa por defecto la primera opción de la lista
-            if (!reportesSubmenu.classList.contains('hidden')) {
-                submenuItems.forEach(item => item.classList.remove('active'));
-                if (submenuItems.length > 0) {
-                    submenuItems[0].classList.add('active');
-                }
-                activarContenidoCentral('tab-parciales');
-            }
-        } else {
-            // Si hace clic en Registro o Usuario, oculta Reportes automáticamente
-            reportesSubmenu.classList.add('hidden');
-            const targetTabId = this.getAttribute('data-tab');
-            activarContenidoCentral(targetTabId);
-        }
-    });
-});
-
-// INTERACCIÓN DE LAS OPCIONES INTERNAS DEL SUBMENÚ
-submenuItems.forEach(item => {
-    item.addEventListener('click', function() {
-        submenuItems.forEach(si => si.classList.remove('active'));
-        this.classList.add('active');
-        
-        const targetTabId = this.getAttribute('data-tab');
-        activarContenidoCentral(targetTabId);
-    });
-});
-
-// Cambiar visibilidad de las ventanas de información de forma limpia
-function activarContenidoCentral(tabId) {
-    const allTabs = document.querySelectorAll('.tab-content');
-    allTabs.forEach(tab => tab.classList.add('hidden'));
+// Navegación de botones raíz (Registro, Usuario)
+function navegarALink(tabId) {
+    document.getElementById('reportes-submenu').classList.add('hidden'); // Cierra reportes
+    resetearEstilosMenu();
     
-    const targetTab = document.getElementById(tabId);
-    if (targetTab) {
-        targetTab.classList.remove('hidden');
-    }
+    // Ilumina el botón correspondiente
+    const eventBtn = event.currentTarget;
+    if(eventBtn) eventBtn.classList.add('active');
+    
+    mostrarSeccionContenido(tabId);
 }
 
-// Renderizar la tabla con los datos del SIIA
-function cargarCalificaciones() {
-    if (!gradesTableBody) return;
-    gradesTableBody.innerHTML = ""; 
+// Clic al botón raíz de Reportes
+function conmutarReportes() {
+    const submenu = document.getElementById('reportes-submenu');
+    submenu.classList.toggle('hidden'); // Abre o cierra
+    
+    resetearEstilosMenu();
+    document.querySelector('[onclick="conmutarReportes()"]').classList.add('active');
+    document.getElementById('sub-item-parciales').classList.add('active');
+    
+    mostrarSeccionContenido('tab-parciales');
+    construirTablaGrd();
+}
+
+// Clic a las opciones internas de Reportes
+function navegarASubmenu(tabId, element) {
+    const subItems = document.querySelectorAll('.submenu-item');
+    subItems.forEach(item => item.classList.remove('active'));
+    element.classList.add('active');
+    
+    resetearEstilosMenu();
+    document.querySelector('[onclick="conmutarReportes()"]').classList.add('active');
+    
+    mostrarSeccionContenido(tabId);
+}
+
+// Limpiador de estilos de botones
+function resetearEstilosMenu() {
+    const btns = document.querySelectorAll('.menu-btn');
+    btns.forEach(b => b.classList.remove('active'));
+    const subItems = document.querySelectorAll('.submenu-item');
+    subItems.forEach(s => s.classList.remove('active'));
+}
+
+// Alternar contenedores centrales
+function mostrarSeccionContenido(tabId) {
+    const tabs = document.querySelectorAll('.tab-content');
+    tabs.forEach(t => t.classList.add('hidden'));
+    document.getElementById(tabId).classList.remove('hidden');
+}
+
+// Renderizador de filas
+function construirTablaGrd() {
+    const tbody = document.getElementById('grades-table-body');
+    if (!tbody) return;
+    tbody.innerHTML = "";
     MATERIAS_DATA.forEach(row => {
         const fila = document.createElement('tr');
         fila.innerHTML = `
@@ -111,14 +102,13 @@ function cargarCalificaciones() {
             <td class="center-text">${row.p3}</td>
             <td class="center-text font-small">${row.grupo}</td>
         `;
-        gradesTableBody.appendChild(fila);
+        tbody.appendChild(fila);
     });
 }
 
-// Botón de Cerrar Sesión
-logoutBtn.addEventListener('click', function() {
-    dashboardContainer.classList.add('hidden');
-    loginPageContainer.classList.remove('hidden');
-    loginForm.reset();
-    loginError.textContent = "";
-});
+function cerrarSesionPortal() {
+    document.getElementById('dashboard-container').classList.add('hidden');
+    document.getElementById('login-page-container').classList.remove('hidden');
+    document.getElementById('login-form').reset();
+    document.getElementById('login-error').textContent = "";
+}
