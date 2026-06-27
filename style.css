@@ -1,13 +1,14 @@
 :root {
-    --primary: #1e3a8a;
-    --primary-hover: #1d4ed8;
-    --bg: #f8fafc;
-    --card-bg: #ffffff;
-    --text: #334155;
-    --text-light: #64748b;
-    --border: #e2e8f0;
-    --danger: #ef4444;
-    --success: #10b981;
+    --primary: #15803d; /* Verde esmeralda principal */
+    --primary-hover: #166534; /* Verde más oscuro al pasar el cursor */
+    --bg: #f1f5f9; /* Gris muy claro para el fondo de la pantalla */
+    --card-bg: #ffffff; /* Blanco para los contenedores */
+    --text: #1e293b; /* Gris oscuro para textos principales */
+    --text-light: #64748b; /* Gris medio para subtítulos y etiquetas */
+    --border: #cbd5e1; /* Gris claro para los bordes y líneas */
+    --danger: #dc2626; /* Rojo para alertas y cerrar sesión */
+    --danger-hover: #b91c1c; /* Rojo oscuro para hover */
+    --success-bg: #f0fdf4; /* Fondo verde claro para resaltar */
 }
 
 * {
@@ -36,7 +37,7 @@ body {
     background: var(--card-bg);
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     border: 1px solid var(--border);
 }
 
@@ -44,6 +45,7 @@ body {
 #login-container {
     width: 100%;
     max-width: 400px;
+    border-top: 5px solid var(--primary); /* Línea decorativa verde */
 }
 
 h2, h3 {
@@ -67,6 +69,7 @@ h2, h3 {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 6px;
+    color: var(--text);
 }
 
 .input-group input {
@@ -76,10 +79,12 @@ h2, h3 {
     border-radius: 6px;
     font-size: 15px;
     outline: none;
+    background-color: #f8fafc;
 }
 
 .input-group input:focus {
     border-color: var(--primary);
+    background-color: var(--card-bg);
 }
 
 .btn {
@@ -108,23 +113,27 @@ h2, h3 {
 }
 
 .btn-secondary:hover {
-    background: #fef2f2;
+    background: #fef2f2; /* Toque ligero de rojo al pasar por cerrar sesión */
+    color: var(--danger-hover);
+    border-color: var(--danger-hover);
 }
 
 .error-msg {
-    color: var(--danger);
+    color: var(--danger); /* Uso sutil del rojo en errores */
     font-size: 14px;
     margin-top: 12px;
     text-align: center;
+    font-weight: 500;
 }
 
 .demo-info {
     margin-top: 20px;
-    background: #f1f5f9;
+    background: #f8fafc;
     padding: 12px;
     border-radius: 6px;
     font-size: 13px;
     color: var(--text-light);
+    border-left: 3px solid var(--border);
 }
 
 /* DASHBOARD */
@@ -135,6 +144,11 @@ header {
     margin-bottom: 30px;
     border-bottom: 2px solid var(--border);
     padding-bottom: 15px;
+}
+
+header h1 {
+    color: var(--text);
+    font-size: 26px;
 }
 
 .grid-layout {
@@ -150,6 +164,8 @@ header {
 .profile-info p {
     margin-bottom: 10px;
     font-size: 15px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 6px;
 }
 
 .stats-grid {
@@ -159,11 +175,12 @@ header {
 }
 
 .stat-item {
-    background: #f1f5f9;
+    background: var(--success-bg); /* Fondo verde claro institucional */
     padding: 15px;
     border-radius: 8px;
     flex: 1;
     text-align: center;
+    border: 1px solid #bbf7d0;
 }
 
 .stat-val {
@@ -207,18 +224,19 @@ th, td {
 }
 
 th {
-    background: #f8fafc;
+    background: #e2e8f0; /* Fondo gris para encabezados */
     font-weight: 600;
     color: var(--text);
 }
 
 tr:hover {
-    background: #f8fafc;
+    background: #f8fafc; /* Iluminación gris clara al pasar sobre filas */
 }
 
 .final-grade {
     font-weight: bold;
     color: var(--primary);
+    background-color: var(--success-bg);
 }
 
 .hidden {
@@ -238,4 +256,3 @@ tr:hover {
         text-align: center;
     }
 }
-
