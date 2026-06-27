@@ -3,6 +3,9 @@
     --teschi-dark-green: #68ab59; 
     --teschi-bg-light: #d8eed3; 
     --white: #ffffff;
+    --border-gray: #cbd5e1;
+    --btn-gray: #e2e8f0;
+    --btn-gray-hover: #cbd5e1;
 }
 
 * {
@@ -16,16 +19,19 @@ body {
     background-color: var(--teschi-bg-light);
     color: #333;
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-/* INTERFAZ DE LOGIN */
+/* PÁGINA DE LOGIN INICIAL */
 #login-page-container {
     width: 100%;
     max-width: 900px;
     margin: 30px auto;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 30px;
     padding: 10px;
 }
 
@@ -51,16 +57,16 @@ body {
 }
 
 .teschi-header h1 {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
     margin-top: 10px;
 }
 
 .siia-title {
-    font-size: 14px;
+    font-size: 15px;
     font-style: italic;
     font-weight: bold;
-    margin-top: 12px;
+    margin-top: 15px;
 }
 
 .login-main-content {
@@ -68,14 +74,10 @@ body {
     justify-content: space-around;
     align-items: center;
     gap: 20px;
-    background-color: var(--white);
-    padding: 30px 15px;
-    border-radius: 10px;
-    border: 1px solid #cbd5e1;
 }
 
 .teschi-mascot {
-    max-width: 140px;
+    max-width: 160px;
     height: auto;
 }
 
@@ -83,7 +85,8 @@ body {
     background-color: var(--teschi-dark-green);
     padding: 20px;
     border-radius: 15px;
-    width: 220px;
+    width: 240px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
 }
 
 .teschi-login-box .input-group {
@@ -92,12 +95,12 @@ body {
 
 .teschi-login-box input {
     width: 100%;
-    padding: 8px;
+    padding: 8px 10px;
     border: 1px solid #777;
     border-radius: 5px;
     text-align: center;
     outline: none;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .btn-teschi-submit {
@@ -108,14 +111,14 @@ body {
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .forgot-link {
     display: block;
     text-align: center;
     color: #1e40af;
-    font-size: 11px;
+    font-size: 12px;
     margin-top: 10px;
 }
 
@@ -125,7 +128,7 @@ body {
     padding: 12px;
     text-align: center;
     color: var(--white);
-    font-size: 11px;
+    font-size: 12px;
     border: 1px solid var(--white);
 }
 
@@ -136,12 +139,12 @@ body {
 
 .error-msg {
     color: #fca5a5;
-    font-size: 11px;
+    font-size: 12px;
     text-align: center;
     margin-top: 5px;
 }
 
-/* INTERFAZ DEL PANEL PRIVADO */
+/* INTERFAZ INTERNA DESPUÉS DE LOGUEAR */
 .teschi-dashboard {
     display: flex;
     min-height: 100vh;
@@ -149,6 +152,7 @@ body {
     width: 100%;
 }
 
+/* BARRA LATERAL IZQUIERDA */
 .teschi-sidebar {
     width: 240px;
     padding: 20px 15px;
@@ -167,12 +171,12 @@ body {
 
 .sidebar-user-info {
     color: var(--white);
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.4;
 }
 
 .user-matricula-display {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
 }
 
@@ -188,88 +192,98 @@ body {
 }
 
 .user-career-display {
-    font-size: 11px;
+    font-size: 12px;
     margin-bottom: 4px;
 }
 
+/* BOTONES DE MENÚ RECTANGULARES GRISES */
 .sidebar-menu {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 2px; 
+    margin-top: 10px;
 }
 
 .menu-btn {
     width: 100%;
     padding: 10px 12px;
-    background: linear-gradient(to bottom, #a3dc95, #7dbb6e);
-    color: var(--white);
-    border: 1px solid #ffffff;
+    background-color: var(--btn-gray);
+    color: #475569;
+    border: 1px solid #bbe1b3;
     text-align: left;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
 }
 
+.menu-btn:hover {
+    background-color: var(--btn-gray-hover);
+}
+
 .menu-btn.active {
-    background: linear-gradient(to bottom, #7cbd6c, #6ba75c);
+    background-color: #ffffff; 
+    color: #166534;
+    border-right: none;
 }
 
 .logout-style {
-    background: linear-gradient(to bottom, #fca5a5, #ef4444);
-    color: white;
+    color: #b91c1c; 
 }
 
-/* ELEMENTOS BLANCOS DEL ACORDEÓN DESPLEGABLE */
+/* CAJA DESPLEGABLE (OPCIONES BLANCAS) */
 .submenu-content {
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
+    background-color: #ffffff; 
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
 }
 
 .submenu-item {
     width: 100%;
     padding: 8px 15px;
     background-color: #ffffff;
-    color: #757575; 
+    color: #555; 
     border: none;
     border-bottom: 1px solid #f1f5f9;
     text-align: left;
-    font-size: 11px;
+    font-size: 12px;
     cursor: pointer;
 }
 
 .submenu-item:hover {
     background-color: #f8fafc;
+    color: #333;
 }
 
 .submenu-item.active {
     font-weight: bold;
-    color: #15803d;
+    color: #15803d; 
     background-color: #f0fdf4;
 }
 
-/* MARCO CENTRAL BLANCO */
+/* PANEL DERECHO BLANCO GIGANTE */
 .teschi-main-panel {
     flex-grow: 1;
     background-color: var(--teschi-green);
-    padding: 20px 20px 20px 0;
+    padding: 20px 20px 20px 0; 
     display: flex;
 }
 
 .white-content-box {
     background-color: var(--white);
     width: 100%;
-    border-radius: 4px;
-    padding: 25px;
-    min-height: 85vh;
+    border-radius: 4px; 
+    padding: 30px;
+    min-height: 80vh;
 }
 
-/* CONTENEDOR BOLETA REAL */
+/* CONTENEDORES BOLETA REAL */
 .boleta-header-box {
     border: 1px solid #94d385;
     border-radius: 6px;
     padding: 10px 15px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     color: #166534;
     display: flex;
@@ -279,18 +293,18 @@ body {
 }
 
 .periodo-selector-bar {
-    background-color: #c2e7be;
+    background-color: #c2e7be; 
     padding: 6px 12px;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
     gap: 4px;
     margin-bottom: 15px;
-    border: 1px solid #94d385;
+    border: 1px solid #a3dc95;
 }
 
 .periodo-lbl {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
     color: #14532d;
 }
@@ -300,13 +314,13 @@ body {
     border: 1px solid #cbd5e1;
     padding: 4px 8px;
     border-radius: 3px;
-    font-size: 11px;
+    font-size: 12px;
     display: flex;
     justify-content: space-between;
     color: #475569;
 }
 
-/* TABLA INSTITUCIONAL DEL TESCHI */
+/* TABLA INSTITUCIONAL ACTUALIZADA CON COLORES DE TU CAPTURA */
 .table-responsive {
     overflow-x: auto;
 }
@@ -314,26 +328,30 @@ body {
 .teschi-table-official {
     width: 100%;
     border-collapse: collapse;
-    font-size: 11px;
+    font-size: 13px; 
     border: 1px solid #cbd5e1;
 }
 
+/* REPLICA DEL ENCABEZADO VERDE PINO OSCURO DE LA IMAGEN */
 .teschi-table-official th {
-    background: linear-gradient(to bottom, #4f81bd, #385d8a);
+    background: linear-gradient(to bottom, #1e4d38, #143527); 
     color: #ffffff;
-    padding: 8px 6px;
+    padding: 10px 6px;
     font-weight: bold;
     border: 1px solid #cbd5e1;
     text-align: center;
 }
 
+/* REPLICA DE FILAS Y RECUADROS INTERNOS */
 .teschi-table-official td {
-    padding: 8px 6px;
+    padding: 10px 6px;
     border: 1px solid #cbd5e1;
+    background-color: #ffffff;
 }
 
-.teschi-table-official tr:nth-child(even) {
-    background-color: #f8fafc;
+/* REPLICA DE FILAS PARES GRIS AZULADO CLARO DE LA IMAGEN */
+.teschi-table-official tr:nth-child(even) td {
+    background-color: #e9f1f5; 
 }
 
 .col-num { width: 5%; }
@@ -344,14 +362,25 @@ body {
 
 .center-text { text-align: center; }
 .text-left { text-align: left; }
-.font-small { font-size: 10px; }
+.font-small { font-size: 12px; }
 
-/* UTILERÍAS GLOBALES INMUTABLES */
+.profile-info p {
+    margin-bottom: 10px;
+    font-size: 15px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 6px;
+}
+
 .hidden {
     display: none !important;
 }
 
+/* RESPONSIVO MÓVIL */
 @media (max-width: 768px) {
+    .login-main-content {
+        flex-direction: column;
+        gap: 30px;
+    }
     .teschi-dashboard {
         flex-direction: column;
     }
@@ -361,70 +390,4 @@ body {
     .teschi-main-panel {
         padding: 15px;
     }
-    .login-main-content {
-        flex-direction: column;
-        padding: 20px;
     }
-}
-
-```css
-/* DISEÑO DEL FORMULARIO DE ACTUALIZACIÓN DE DATOS (SIIA) */
-.teschi-form-datos {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.form-section-title {
-    color: #1e40af; /* Azul para los títulos de sección: Alumno, Domicilio */
-    font-size: 16px;
-    font-weight: bold;
-    border-bottom: 2px solid #3b82f6;
-    padding-bottom: 4px;
-    margin-top: 10px;
-    text-decoration: none;
-}
-
-/* Cuadrícula de 3 columnas para PC / Pantallas grandes */
-.form-grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-}
-
-.f-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.f-group label {
-    font-size: 11px;
-    font-weight: bold;
-    color: #475569;
-}
-
-.f-group input, .f-group select {
-    width: 100%;
-    padding: 6px 8px;
-    border: 1px solid #cbd5e1;
-    border-radius: 4px;
-    font-size: 12px;
-    background-color: #f8fafc;
-    color: #334155;
-    outline: none;
-}
-
-.f-group input:focus, .f-group select:focus {
-    border-color: #3b82f6;
-    background-color: #ffffff;
-}
-
-/* Adaptación responsiva para celulares (se hace una sola columna ordenada) */
-@media (max-width: 600px) {
-    .form-grid-3 {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-}
