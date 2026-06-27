@@ -1,6 +1,10 @@
-// Base de datos estática
-const USUARIO_VALIDO = { matricula: "2025452046", password: "456" };
+// Base de datos de acceso autorizada
+const USUARIO_VALIDO = {
+    matricula: "2025452046",
+    password: "alumno123"
+};
 
+// Matriz de materias oficiales del SIIA
 const MATERIAS_DATA = [
     { num: 1, docente: "GARDUÑO FLORES FRANCISCO ADRIÁN", materia: "FUNDAMENTOS DE PROGRAMACIÓN", p1: 70, p2: 70, p3: 95, grupo: "1ISC21" },
     { num: 2, docente: "RAMIREZ HIDALGO JUAN ALBERTO", materia: "ÁLGEBRA LINEAL", p1: 71, p2: 86, p3: 95, grupo: "2ISC11" },
@@ -11,67 +15,73 @@ const MATERIAS_DATA = [
     { num: 7, docente: "SOLIS PEREZ SHARON", materia: "QUÍMICA", p1: 95, p2: 95, p3: 85, grupo: "2ISC11" }
 ];
 
-// Login
-document.getElementById('login-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const mat = document.getElementById('matricula').value.trim();
-    const pass = document.getElementById('password').value;
+// Esperar a que cargue el árbol HTML por completo
+window.addEventListener('DOMContentLoaded', () => {
+    const lForm = document.getElementById('login-form');
+    if (lForm) {
+        lForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const inputMatricula = document.getElementById('matricula').value.trim();
+            const inputPassword = document.getElementById('password').value;
 
-    if (mat === USUARIO_VALIDO.matricula && pass === USUARIO_VALIDO.password) {
-        document.getElementById('login-page-container').classList.add('hidden');
-        document.getElementById('dashboard-container').classList.remove('hidden');
-        
-        // Carga por defecto parciales
-        document.getElementById('reportes-submenu').classList.remove('hidden');
-        resetearEstilosMenu();
-        document.querySelector('[onclick="conmutarReportes()"]').classList.add('active');
-        document.getElementById('sub-item-parciales').classList.add('active');
-        
-        mostrarSeccionContenido('tab-parciales');
-        construirTablaGrd();
-    } else {
-        document.getElementById('login-error').textContent = "Matrícula o contraseña incorrectas. Inténtalo de nuevo.";
+            if (inputMatricula === USUARIO_VALIDO.matricula && inputPassword === USUARIO_VALIDO.password) {
+                document.getElementById('login-page-container').classList.add('hidden');
+                document.getElementById('dashboard-container').classList.remove('hidden');
+                
+                // Configuración de interfaz al ingresar
+                document.getElementById('reportes-submenu').classList.remove('hidden');
+                resetearEstilosMenu();
+                
+                const btnRep = document.getElementById('btn-reportes-main');
+                if(btnRep) btnRep.classList.add('active');
+                
+                const subPar = document.getElementById('sub-item-parciales');
+                if(subPar) subPar.classList.add('active');
+                
+                mostrarSeccionContenido('tab-parciales');
+                construirTablaGrd();
+            } else {
+                document.getElementById('login-error').textContent = "Matrícula o contraseña incorrectas. Inténtalo de nuevo.";
+            }
+        });
     }
 });
 
-// Navegación de botones raíz (Registro, Usuario)
+// Navegación principal lateral
 function navegarALink(tabId) {
-    document.getElementById('reportes-submenu').classList.add('hidden'); // Cierra reportes
+    document.getElementById('reportes-submenu').classList.add('hidden');
     resetearEstilosMenu();
-    
-    // Ilumina el botón correspondiente
-    const eventBtn = event.currentTarget;
-    if(eventBtn) eventBtn.classList.add('active');
-    
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+    }
     mostrarSeccionContenido(tabId);
 }
 
-// Clic al botón raíz de Reportes
+// Clic al menú raíz Reportes
 function conmutarReportes() {
     const submenu = document.getElementById('reportes-submenu');
-    submenu.classList.toggle('hidden'); // Abre o cierra
+    submenu.classList.toggle('hidden');
     
     resetearEstilosMenu();
-    document.querySelector('[onclick="conmutarReportes()"]').classList.add('active');
+    document.getElementById('btn-reportes-main').classList.add('active');
     document.getElementById('sub-item-parciales').classList.add('active');
     
     mostrarSeccionContenido('tab-parciales');
     construirTablaGrd();
 }
 
-// Clic a las opciones internas de Reportes
+// Clic a las subopciones de Reportes
 function navegarASubmenu(tabId, element) {
     const subItems = document.querySelectorAll('.submenu-item');
     subItems.forEach(item => item.classList.remove('active'));
-    element.classList.add('active');
+    if (element) element.classList.add('active');
     
     resetearEstilosMenu();
-    document.querySelector('[onclick="conmutarReportes()"]').classList.add('active');
+    document.getElementById('btn-reportes-main').classList.add('active');
     
     mostrarSeccionContenido(tabId);
 }
 
-// Limpiador de estilos de botones
 function resetearEstilosMenu() {
     const btns = document.querySelectorAll('.menu-btn');
     btns.forEach(b => b.classList.remove('active'));
@@ -79,14 +89,13 @@ function resetearEstilosMenu() {
     subItems.forEach(s => s.classList.remove('active'));
 }
 
-// Alternar contenedores centrales
 function mostrarSeccionContenido(tabId) {
     const tabs = document.querySelectorAll('.tab-content');
     tabs.forEach(t => t.classList.add('hidden'));
-    document.getElementById(tabId).classList.remove('hidden');
+    const target = document.getElementById(tabId);
+    if (target) target.classList.remove('hidden');
 }
 
-// Renderizador de filas
 function construirTablaGrd() {
     const tbody = document.getElementById('grades-table-body');
     if (!tbody) return;
