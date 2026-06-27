@@ -1,18 +1,18 @@
 // Base de datos simulada del estudiante
 const USUARIO_VALIDO = {
     matricula: "2025452046",
-    password: "2025452046"
+    password: "alumno123"
 };
 
-// Tus 7 materias oficiales
+// Tus 7 materias oficiales del TESCHI
 const MATERIAS_DATA = [
-    { num: 1, docente: "GARDUÑO FLORES FRANCISCO ADRIÁN", materia: "FUNDAMENTOS DE PROGRAMACIÓN", p1: 100, p2: 98, p3: 95, grupo: "1ISC21" },
-    { num: 2, docente: "RAMIREZ HIDALGO JUAN ALBERTO", materia: "ÁLGEBRA LINEAL", p1: 96, p2: 100, p3: 95, grupo: "2ISC11" },
-    { num: 3, docente: "CRUZ MONTIEL MARIO", materia: "CÁLCULO INTEGRAL", p1: 100, p2: 94, p3: 95, grupo: "2ISC11" },
-    { num: 4, docente: "ZAMORA TÉLLEZ MERCEDES DAMARIS", materia: "CONTABILIDAD FINANCIERA", p1: 100, p2: 99, p3: 100, grupo: "2ISC11" },
-    { num: 5, docente: "MENDEZ CALVA JULIO CESAR", materia: "PROBABILIDAD Y ESTADÍSTICA", p1: 92, p2: 100, p3: 100, grupo: "2ISC11" },
-    { num: 6, docente: "LLINAS PEREZ MARCO ANTONIO", materia: "PROGRAMACIÓN ORIENTADA A OBJETOS", p1: 97, p2: 95, p3: 100, grupo: "2ISC11" },
-    { num: 7, docente: "SOLIS PEREZ SHARON", materia: "QUÍMICA", p1: 90, p2: 90, p3: 85, grupo: "2ISC11" }
+    { num: 1, docente: "GARDUÑO FLORES FRANCISCO ADRIÁN", materia: "FUNDAMENTOS DE PROGRAMACIÓN", p1: 70, p2: 70, p3: 95, grupo: "1ISC21" },
+    { num: 2, docente: "RAMIREZ HIDALGO JUAN ALBERTO", materia: "ÁLGEBRA LINEAL", p1: 71, p2: 86, p3: 95, grupo: "2ISC11" },
+    { num: 3, docente: "CRUZ MONTIEL MARIO", materia: "CÁLCULO INTEGRAL", p1: 72, p2: 94, p3: 95, grupo: "2ISC11" },
+    { num: 4, docente: "ZAMORA TÉLLEZ MERCEDES DAMARIS", materia: "CONTABILIDAD FINANCIERA", p1: 74, p2: 80, p3: 100, grupo: "2ISC11" },
+    { num: 5, docente: "MENDEZ CALVA JULIO CESAR", materia: "PROBABILIDAD Y ESTADÍSTICA", p1: 92, p2: 70, p3: 85, grupo: "2ISC11" },
+    { num: 6, docente: "LLINAS PEREZ MARCO ANTONIO", materia: "PROGRAMACIÓN ORIENTADA A OBJETOS", p1: 90, p2: 85, p3: 100, grupo: "2ISC11" },
+    { num: 7, docente: "SOLIS PEREZ SHARON", materia: "QUÍMICA", p1: 95, p2: 95, p3: 85, grupo: "2ISC11" }
 ];
 
 const loginForm = document.getElementById('login-form');
@@ -20,9 +20,9 @@ const loginPageContainer = document.getElementById('login-page-container');
 const dashboardContainer = document.getElementById('dashboard-container');
 const loginError = document.getElementById('login-error');
 const gradesTableBody = document.getElementById('grades-table-body');
+const finalGradesTableBody = document.getElementById('final-grades-table-body');
 const logoutBtn = document.getElementById('logout-btn');
 
-const btnReportesMain = document.getElementById('btn-reportes-main');
 const reportesSubmenu = document.getElementById('reportes-submenu');
 
 // Manejador del Inicio de Sesión
@@ -36,10 +36,10 @@ if (loginForm) {
             loginPageContainer.classList.add('hidden');
             dashboardContainer.classList.remove('hidden');
             
-            // Abre el submenú de Reportes por defecto al entrar
             reportesSubmenu.classList.remove('hidden');
             activarContenidoCentral('tab-parciales');
             cargarCalificaciones();
+            cargarCalificacionesFinales(); // Carga también la nueva tabla en segundo plano
         } else {
             loginError.textContent = "Matrícula o contraseña incorrectas. Inténtalo de nuevo.";
         }
@@ -55,7 +55,6 @@ mainButtons.forEach(button => {
         mainButtons.forEach(btn => btn.classList.remove('active'));
         this.classList.add('active');
         
-        // Si se hace clic en Reportes principal
         if (this.id === 'btn-reportes-main') {
             reportesSubmenu.classList.toggle('hidden');
             
@@ -67,7 +66,6 @@ mainButtons.forEach(button => {
                 activarContenidoCentral('tab-parciales');
             }
         } else {
-            // Si hace clic en Registro o Usuario externo
             reportesSubmenu.classList.add('hidden');
             const targetTabId = this.getAttribute('data-tab');
             activarContenidoCentral(targetTabId);
@@ -86,7 +84,6 @@ submenuItems.forEach(item => {
     });
 });
 
-// Alternar visibilidad de las capas centrales
 function activarContenidoCentral(tabId) {
     const allTabs = document.querySelectorAll('.tab-content');
     allTabs.forEach(tab => tab.classList.add('hidden'));
@@ -97,7 +94,7 @@ function activarContenidoCentral(tabId) {
     }
 }
 
-// Construir boleta del TESCHI
+// Tabla de Calificaciones Parciales
 function cargarCalificaciones() {
     if (!gradesTableBody) return;
     gradesTableBody.innerHTML = ""; 
@@ -116,7 +113,24 @@ function cargarCalificaciones() {
     });
 }
 
-// Botón de Salir
+// NUEVA FUNCIÓN: Tabla de Calificaciones Finales (idéntica a tu imagen)
+function cargarCalificacionesFinales() {
+    if (!finalGradesTableBody) return;
+    finalGradesTableBody.innerHTML = "";
+    MATERIAS_DATA.forEach(row => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+            <td class="center-text">${row.num}</td>
+            <td class="text-left font-small">${row.docente}</td>
+            <td class="text-left font-small">${row.materia}</td>
+            <td class="center-text"></td> <!-- Primera vuelta vacía -->
+            <td class="center-text"></td> <!-- Segunda vuelta vacía -->
+            <td class="center-text font-small">${row.grupo}</td>
+        `;
+        finalGradesTableBody.appendChild(fila);
+    });
+}
+
 if (logoutBtn) {
     logoutBtn.addEventListener('click', function() {
         dashboardContainer.classList.add('hidden');
