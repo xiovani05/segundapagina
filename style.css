@@ -178,13 +178,14 @@ body {
 .user-matricula-display {
     font-size: 15px;
     font-weight: bold;
-    margin-bottom: 25px;
+    
 }
 
 .divider-line {
     height: 1px;
     background-color: rgba(255, 255, 255, 0.4);
     margin: 8px 0 12px 0;
+    margin-bottom: 25px;
 }
 
 .user-name-display {
@@ -194,7 +195,7 @@ body {
 
 .user-career-display {
     font-size: 12px;
-    margin-bottom: 4px;
+    margin-bottom: 25px;
 }
 
 /* BOTONES DE MENÚ RECTANGULARES GRISES */
