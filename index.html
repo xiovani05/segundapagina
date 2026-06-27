@@ -31,7 +31,7 @@
                     <div class="input-group">
                         <input type="password" id="password" placeholder="Contraseña" required>
                     </div>
-                    <button type="submit" id="btn-login-submit" class="btn-teschi-submit">Iniciar Sesión</button>
+                    <button type="submit" class="btn-teschi-submit">Iniciar Sesión</button>
                     <a href="#" class="forgot-link">¿Olvidó su Contraseña?</a>
                     <p id="login-error" class="error-msg"></p>
                 </form>
@@ -76,7 +76,7 @@
                 </div>
 
                 <button class="menu-btn" onclick="navegarALink('tab-usuario')">Usuario</button>
-                <button class="menu-btn logout-style" id="logout-btn" onclick="cerrarSesionPortal()">Salir</button>
+                <button class="menu-btn logout-style" onclick="cerrarSesionPortal()">Salir</button>
             </nav>
         </aside>
 
@@ -84,7 +84,7 @@
         <main class="teschi-main-panel">
             <div class="white-content-box">
                 
-                <!-- SECCIÓN: REGISTRO (PÁGINA EN BLANCO) -->
+                <!-- SECCIÓN: REGISTRO -->
                 <div id="tab-registro" class="tab-content hidden"></div>
 
                 <!-- SUB-SECCIÓN: CALIFICACIONES PARCIALES -->
@@ -140,7 +140,6 @@
                     </div>
 
                     <form class="teschi-form-datos" onsubmit="event.preventDefault();">
-                        
                         <h3 class="form-section-title">Alumno</h3>
                         <div class="form-grid-3">
                             <div class="f-group">
@@ -187,4 +186,5 @@
                             </div>
                         </div>
 
-                        
+                        <div class="form-grid-3">
+                            
