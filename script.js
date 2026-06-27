@@ -4,15 +4,15 @@ const USUARIO_VALIDO = {
     password: "alumno123"
 };
 
-// Tus 7 materias con calificaciones
+// Tus 7 materias con los docentes, calificaciones y grupos exactos de tu imagen
 const MATERIAS_DATA = [
-    { nombre: "Programación Orientada a Objetos", p1: 96, p2: 97, p3: 95 },
-    { nombre: "Cálculo Integral", p1: 95, p2: 98, p3: 95 },
-    { nombre: "Álgebra Lineal", p1: 97, p2: 95, p3: 95 },
-    { nombre: "Contabilidad", p1: 98, p2: 96, p3: 100 },
-    { nombre: "Fundamentos de Programación", p1: 95, p2: 99, p3: 100 },
-    { nombre: "Química", p1: 96, p2: 97, p3: 85 },
-    { nombre: "Probabilidad", p1: 97, p2: 95, p3: 85 }
+    { num: 1, docente: "GARDUÑO FLORES FRANCISCO ADRIÁN", materia: "FUNDAMENTOS DE PROGRAMACIÓN", p1: 70, p2: 70, p3: 95, grupo: "1ISC21" },
+    { num: 2, docente: "RAMIREZ HIDALGO JUAN ALBERTO", materia: "ÁLGEBRA LINEAL", p1: 71, p2: 86, p3: 95, grupo: "2ISC11" },
+    { num: 3, docente: "CRUZ MONTIEL MARIO", materia: "CÁLCULO INTEGRAL", p1: 72, p2: 94, p3: 95, grupo: "2ISC11" },
+    { num: 4, docente: "ZAMORA TÉLLEZ MERCEDES DAMARIS", materia: "CONTABILIDAD FINANCIERA", p1: 74, p2: 80, p3: 100, grupo: "2ISC11" },
+    { num: 5, docente: "MENDEZ CALVA JULIO CESAR", materia: "PROBABILIDAD Y ESTADÍSTICA", p1: 92, p2: 70, p3: 85, grupo: "2ISC11" },
+    { num: 6, docente: "LLINAS PEREZ MARCO ANTONIO", materia: "PROGRAMACIÓN ORIENTADA A OBJETOS", p1: 90, p2: 85, p3: 100, grupo: "2ISC11" },
+    { num: 7, docente: "SOLIS PEREZ SHARON", materia: "QUÍMICA", p1: 95, p2: 95, p3: 85, grupo: "2ISC11" }
 ];
 
 const loginForm = document.getElementById('login-form');
@@ -22,7 +22,6 @@ const loginError = document.getElementById('login-error');
 const gradesTableBody = document.getElementById('grades-table-body');
 const logoutBtn = document.getElementById('logout-btn');
 
-// Elementos del submenú
 const btnReportesMain = document.getElementById('btn-reportes-main');
 const reportesSubmenu = document.getElementById('reportes-submenu');
 
@@ -36,7 +35,6 @@ loginForm.addEventListener('submit', function(e) {
         loginPageContainer.classList.add('hidden');
         dashboardContainer.classList.remove('hidden');
         
-        // Abre el submenú de Reportes por defecto y muestra parciales al entrar
         reportesSubmenu.classList.remove('hidden');
         activarContenidoCentral('tab-parciales');
         cargarCalificaciones();
@@ -45,7 +43,7 @@ loginForm.addEventListener('submit', function(e) {
     }
 });
 
-// INTERACCIÓN DE BOTONES PRINCIPALES (Registro, Reportes, Usuario)
+// INTERACCIÓN DE BOTONES PRINCIPALES
 const mainButtons = document.querySelectorAll('.sidebar-menu > .menu-btn:not(#logout-btn)');
 const submenuItems = document.querySelectorAll('.submenu-item');
 
@@ -54,12 +52,9 @@ mainButtons.forEach(button => {
         mainButtons.forEach(btn => btn.classList.remove('active'));
         this.classList.add('active');
         
-        // Si se hace clic en Reportes
         if (this.id === 'btn-reportes-main') {
-            // Alterna la visibilidad (si está oculto lo muestra, si está abierto lo cierra)
             reportesSubmenu.classList.toggle('hidden');
             
-            // Si al alternar quedó visible, marcamos la primera opción (Parciales) como activa por defecto
             if (!reportesSubmenu.classList.contains('hidden')) {
                 submenuItems.forEach(item => item.classList.remove('active'));
                 if (submenuItems.length > 0) {
@@ -68,7 +63,6 @@ mainButtons.forEach(button => {
                 activarContenidoCentral('tab-parciales');
             }
         } else {
-            // Si hace clic en Registro o Usuario, ocultamos el submenú de Reportes
             reportesSubmenu.classList.add('hidden');
             const targetTabId = this.getAttribute('data-tab');
             activarContenidoCentral(targetTabId);
@@ -76,7 +70,7 @@ mainButtons.forEach(button => {
     });
 });
 
-// INTERACCIÓN DE LAS OPCIONES INTERNAS DEL SUBMENÚ (Calificaciones parciales, finales, etc)
+// INTERACCIÓN DE LAS OPCIONES INTERNAS DEL SUBMENÚ
 submenuItems.forEach(item => {
     item.addEventListener('click', function() {
         submenuItems.forEach(si => si.classList.remove('active'));
@@ -87,7 +81,6 @@ submenuItems.forEach(item => {
     });
 });
 
-// Cambiar visibilidad de las ventanas de información
 function activarContenidoCentral(tabId) {
     const allTabs = document.querySelectorAll('.tab-content');
     allTabs.forEach(tab => tab.classList.add('hidden'));
@@ -98,17 +91,19 @@ function activarContenidoCentral(tabId) {
     }
 }
 
+// Renderizar la tabla con la estructura institucional exacta
 function cargarCalificaciones() {
     gradesTableBody.innerHTML = ""; 
-    MATERIAS_DATA.forEach(materia => {
-        const promedioFinal = ((materia.p1 + materia.p2 + materia.p3) / 3).toFixed(1);
+    MATERIAS_DATA.forEach(row => {
         const fila = document.createElement('tr');
         fila.innerHTML = `
-            <td><strong>${materia.nombre}</strong></td>
-            <td class="center-text">${materia.p1}</td>
-            <td class="center-text">${materia.p2}</td>
-            <td class="center-text">${materia.p3}</td>
-            <td class="final-grade">${promedioFinal}</td>
+            <td class="center-text">${row.num}</td>
+            <td class="text-left font-small">${row.docente}</td>
+            <td class="text-left font-small">${row.materia}</td>
+            <td class="center-text">${row.p1}</td>
+            <td class="center-text">${row.p2}</td>
+            <td class="center-text">${row.p3}</td>
+            <td class="center-text font-small">${row.grupo}</td>
         `;
         gradesTableBody.appendChild(fila);
     });
