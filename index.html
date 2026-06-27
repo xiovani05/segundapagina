@@ -188,9 +188,20 @@
                 </div>
 
                 <!-- SUB-SECCIÓN: TIRA DE MATERIA -->
-                <div id="tab-tira" class="tab-content hidden">
+                <div id="tab-tira" class="tab-content hidden" style="text-align: center;">
                     <div class="boleta-header-box"><span class="icon-folder">📁</span> Tira de materia</div>
-                    <p style="color: #64748b; font-style: italic; margin-top: 15px;">Carga académica vigente autorizada para el periodo 2026-1.</p>
+                    <div class="periodo-selector-bar">
+                        <span class="periodo-lbl">2026-1</span>
+                        <div class="periodo-dropdown-sim">
+                            <span>Selecciona un periodo para ver tus calificaciones | 2026-1</span>
+                            <span class="arrow-down">⌂</span>
+                        </div>
+                    </div>
+                    
+                    <!-- IMAGEN AJUSTADA PARA TU TIRA DE MATERIAS -->
+                    <div style="width: 100%; overflow-x: auto; margin-top: 10px;">
+                        <img id="tira-img-src" src="chrome-native://pdf/link?url=content%3A%2F%2Fmedia%2Fexternal%2Fdownloads%2F14266" alt="Tira de Materia Oficial" style="max-width: 100%; height: auto; border: 1px solid #cbd5e1; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    </div>
                 </div>
 
                 <!-- SECCIÓN: USUARIO -->
