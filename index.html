@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Escolar - Control de Calificaciones</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- PANTALLA DE INICIO DE SESIÓN -->
+    <div id="login-container" class="card">
+        <h2>Portal del Estudiante</h2>
+        <p class="subtitle">Ingresa tus credenciales para acceder</p>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="matricula">Matrícula</label>
+                <input type="text" id="matricula" placeholder="Ej. 20261010" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn">Iniciar Sesión</button>
+            <p id="login-error" class="error-msg"></p>
+        </form>
+        <div class="demo-info">
+            <p><strong>Datos de prueba:</strong><br>Matrícula: 12345<br>Contraseña: alumno123</p>
+        </div>
+    </div>
+
+    <!-- PANTALLA DEL DASHBOARD (OCULTA AL INICIO) -->
+    <div id="dashboard-container" class="container hidden">
+        <header>
+            <h1>Bienvenido al Portal Escolar</h1>
+            <button id="logout-btn" class="btn btn-secondary">Cerrar Sesión</button>
+        </header>
+
+        <main class="grid-layout">
+            <!-- SECCIÓN: DATOS DEL USUARIO -->
+            <section class="card profile-card">
+                <h3>Datos del Alumno</h3>
+                <div class="profile-info">
+                    <p><strong>Nombre:</strong> Carlos Fuentes Pérez</p>
+                    <p><strong>Matrícula:</strong> <span id="user-matricula"></span></p>
+                    <p><strong>Carrera:</strong> Ingeniería en Sistemas</p>
+                    <p><strong>Semestre:</strong> 3er Semestre</p>
+                    <p><strong>Estatus:</strong> Regular</p>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: HISTORIAL ACADÉMICO -->
+            <section class="card history-card">
+                <h3>Historial Académico</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-val">9.2</span>
+                        <span class="stat-lbl">Promedio General</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-val">120</span>
+                        <span class="stat-lbl">Créditos Totales</span>
+                    </div>
+                </div>
+                <h4>Últimos Ciclos Semestrales</h4>
+                <ul>
+                    <li>Primer Semestre (2025-1) — Promedio: 9.4</li>
+                    <li>Segundo Semestre (2025-2) — Promedio: 9.0</li>
+                </ul>
+            </section>
+
+            <!-- SECCIÓN PRINCIPAL: CALIFICACIONES DEL PARCIAL -->
+            <section class="card grades-card full-width">
+                <h3>Calificaciones del Parcial Actual</h3>
+                <p class="subtitle">Desglose por materia, parciales y cálculo automático de promedio final.</p>
+                
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Materia</th>
+                                <th>Parcial 1</th>
+                                <th>Parcial 2</th>
+                                <th>Parcial 3</th>
+                                <th>Promedio Final</th>
+                            </tr>
+                        </thead>
+                        <tbody id="grades-table-body">
+                            <!-- Las filas se generarán dinámicamente con JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
