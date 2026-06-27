@@ -31,7 +31,7 @@
                     <div class="input-group">
                         <input type="password" id="password" placeholder="Contraseña" required>
                     </div>
-                    <button type="submit" class="btn-teschi-submit">Iniciar Sesión</button>
+                    <button type="submit" id="btn-login-submit" class="btn-teschi-submit">Iniciar Sesión</button>
                     <a href="#" class="forgot-link">¿Olvidó su Contraseña?</a>
                     <p id="login-error" class="error-msg"></p>
                 </form>
@@ -66,7 +66,7 @@
                 <button class="menu-btn" onclick="navegarALink('tab-registro')">Registro</button>
                 
                 <div class="submenu-container">
-                    <button class="menu-btn active" onclick="conmutarReportes()">Reportes</button>
+                    <button class="menu-btn active" id="btn-reportes-main" onclick="conmutarReportes()">Reportes</button>
                     <div class="submenu-content" id="reportes-submenu">
                         <button class="submenu-item active" id="sub-item-parciales" onclick="navegarASubmenu('tab-parciales', this)">▸ Calificaciones Parciales</button>
                         <button class="submenu-item" onclick="navegarASubmenu('tab-finales', this)">▸ Calificaciones Finales</button>
@@ -76,7 +76,7 @@
                 </div>
 
                 <button class="menu-btn" onclick="navegarALink('tab-usuario')">Usuario</button>
-                <button class="menu-btn logout-style" onclick="cerrarSesionPortal()">Salir</button>
+                <button class="menu-btn logout-style" id="logout-btn" onclick="cerrarSesionPortal()">Salir</button>
             </nav>
         </aside>
 
@@ -133,7 +133,7 @@
                     <p style="color: #64748b; font-style: italic; margin-top: 15px;">Carga académica vigente autorizada para el periodo 2026-1.</p>
                 </div>
 
-                <!-- SECCIÓN: USUARIO (EL FORMULARIO COMPLETO DE TU IMAGEN) -->
+                <!-- SECCIÓN: USUARIO -->
                 <div id="tab-usuario" class="tab-content hidden">
                     <div class="boleta-header-box">
                         Actualización de datos personales
@@ -141,7 +141,6 @@
 
                     <form class="teschi-form-datos" onsubmit="event.preventDefault();">
                         
-                        <!-- BLOQUE: ALUMNO -->
                         <h3 class="form-section-title">Alumno</h3>
                         <div class="form-grid-3">
                             <div class="f-group">
@@ -186,4 +185,6 @@
                                 <label>Fecha de nacimiento</label>
                                 <input type="text" value="24/11/2005 12:00:00 a. m.">
                             </div>
-                            
+                        </div>
+
+                        
