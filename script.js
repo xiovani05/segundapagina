@@ -1,7 +1,7 @@
 // Base de datos de acceso autorizada
 const USUARIO_VALIDO = {
     matricula: "2025452046",
-    password: "alumno123"
+    password: "456"
 };
 
 // Matriz de materias oficiales del SIIA
