@@ -22,6 +22,7 @@ body {
     background-color: var(--bg);
     color: var(--text);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -39,13 +40,34 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     border: 1px solid var(--border);
+    overflow: hidden; /* Evita que las imágenes se salgan de las esquinas redondeadas */
+}
+
+/* CONTROL DE IMÁGENES AGREGADAS */
+.card-image-container {
+    margin: -30px -30px 20px -30px; /* Expande la imagen al borde de la tarjeta */
+    height: 160px;
+    overflow: hidden;
+}
+
+.main-banner {
+    margin: 0 0 25px 0;
+    border-radius: 12px;
+    height: 220px;
+    border: 1px solid var(--border);
+}
+
+.header-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Centra y recorta la foto de forma adaptativa */
 }
 
 /* LOGIN */
 #login-container {
     width: 100%;
     max-width: 400px;
-    border-top: 5px solid var(--primary); /* Línea decorativa verde */
+    border-top: 5px solid var(--primary);
 }
 
 h2, h3 {
@@ -113,13 +135,13 @@ h2, h3 {
 }
 
 .btn-secondary:hover {
-    background: #fef2f2; /* Toque ligero de rojo al pasar por cerrar sesión */
+    background: #fef2f2;
     color: var(--danger-hover);
     border-color: var(--danger-hover);
 }
 
 .error-msg {
-    color: var(--danger); /* Uso sutil del rojo en errores */
+    color: var(--danger);
     font-size: 14px;
     margin-top: 12px;
     text-align: center;
@@ -175,7 +197,7 @@ header h1 {
 }
 
 .stat-item {
-    background: var(--success-bg); /* Fondo verde claro institucional */
+    background: var(--success-bg);
     padding: 15px;
     border-radius: 8px;
     flex: 1;
@@ -224,13 +246,13 @@ th, td {
 }
 
 th {
-    background: #e2e8f0; /* Fondo gris para encabezados */
+    background: #e2e8f0;
     font-weight: 600;
     color: var(--text);
 }
 
 tr:hover {
-    background: #f8fafc; /* Iluminación gris clara al pasar sobre filas */
+    background: #f8fafc;
 }
 
 .final-grade {
@@ -254,5 +276,8 @@ tr:hover {
         flex-direction: column;
         gap: 15px;
         text-align: center;
+    }
+    .main-banner {
+        height: 140px;
     }
 }
