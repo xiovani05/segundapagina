@@ -12,7 +12,7 @@
     <div id="login-page-container">
         <header class="teschi-header">
             <div class="logo-container">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXcT1VoZHmtZ8Lr6vxmFr9oLk-cwfUaNMgR1vcUYUJFROjUag5XN-CJg_I&s=10" alt="Logo TESCHI" class="teschi-logo">
+                <img src="https://edomex.gob.mx" alt="Logo TESCHI" class="teschi-logo">
             </div>
             <h1>TECNOLÓGICO DE ESTUDIOS SUPERIORES DE CHIMALHUACÁN</h1>
             <p class="siia-title">Sistema de Información Integral Administrativa (SIIA)</p>
@@ -20,7 +20,7 @@
 
         <div class="login-main-content">
             <div class="mascot-container">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_5MDKhzCMTXhg61cxWoQ6lQ8uwiZMVXU2NTi77M67SvoiOVJ3N5pwuTkF&s=10" alt="Mascota TESCHI" class="teschi-mascot">
+                <img src="https://gstatic.com" alt="Mascota TESCHI" class="teschi-mascot">
             </div>
 
             <div id="login-container" class="teschi-login-box">
@@ -62,10 +62,22 @@
                 <p class="user-semester-display">2do Semestre — Regular</p>
             </div>
 
-            <!-- BOTONES CON ATRIBUTO DATA-TAB PARA INTERACCIÓN -->
+            <!-- MENÚ LATERAL CON SUBMENÚ DE REPORTES -->
             <nav class="sidebar-menu">
                 <button class="menu-btn" data-tab="tab-registro">Registro</button>
-                <button class="menu-btn active" data-tab="tab-reportes">Reportes</button>
+                
+                <!-- Botón contenedor de Reportes -->
+                <div class="submenu-container">
+                    <button class="menu-btn active" id="btn-reportes-main">Reportes</button>
+                    <!-- Las opciones de tu imagen -->
+                    <div class="submenu-content" id="reportes-submenu">
+                        <button class="submenu-item active" data-tab="tab-parciales">▸ Calificaciones Parciales</button>
+                        <button class="submenu-item" data-tab="tab-finales">▸ Calificaciones Finales</button>
+                        <button class="submenu-item" data-tab="tab-historial">▸ Historial Académico</button>
+                        <button class="submenu-item" data-tab="tab-tira">▸ Tira de materia</button>
+                    </div>
+                </div>
+
                 <button class="menu-btn" data-tab="tab-usuario">Usuario</button>
                 <button id="logout-btn" class="menu-btn logout-style">Salir</button>
             </nav>
@@ -75,13 +87,13 @@
         <main class="teschi-main-panel">
             <div class="white-content-box">
                 
-                <!-- SECCIÓN 1: REGISTRO (PÁGINA EN BLANCO) -->
+                <!-- SECCIÓN: REGISTRO (PÁGINA EN BLANCO) -->
                 <div id="tab-registro" class="tab-content hidden">
-                    <!-- Se mantiene vacío intencionalmente según tu solicitud -->
+                    <!-- Espacio en blanco solicitado -->
                 </div>
 
-                <!-- SECCIÓN 2: REPORTES (CALIFICACIONES) -->
-                <div id="tab-reportes" class="tab-content">
+                <!-- SUB-SECCIÓN: CALIFICACIONES PARCIALES (TU TABLA DE 7 MATERIAS) -->
+                <div id="tab-parciales" class="tab-content">
                     <div class="panel-header">
                         <h2>Boleta de Calificaciones Parciales</h2>
                         <p>Ciclo Escolar Vigente — Desglose Automático de Promedios</p>
@@ -99,32 +111,75 @@
                                 </tr>
                             </thead>
                             <tbody id="grades-table-body">
-                                <!-- Las filas se generan con JavaScript -->
+                                <!-- Filas dinámicas -->
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- SECCIÓN 3: USUARIO (INFORMACIÓN DEL ESTUDIANTE) -->
+                <!-- SUB-SECCIÓN: CALIFICACIONES FINALES -->
+                <div id="tab-finales" class="tab-content hidden">
+                    <div class="panel-header">
+                        <h2>Calificaciones Finales</h2>
+                        <p>Cierre de actas y evaluaciones definitivas del semestre</p>
+                    </div>
+                    <p style="color: #64748b; font-style: italic;">No hay calificaciones finales asentadas en el sistema todavía.</p>
+                </div>
+
+                <!-- SUB-SECCIÓN: HISTORIAL ACADÉMICO -->
+                <div id="tab-historial" class="tab-content hidden">
+                    <div class="panel-header">
+                        <h2>Historial Académico</h2>
+                        <p>Registro de ciclos escolares anteriores aprobados</p>
+                    </div>
+                    <table class="teschi-table">
+                        <thead>
+                            <tr>
+                                <th>Periodo Semestral</th>
+                                <th class="center-text">Materias Aprobadas</th>
+                                <th class="center-text">Promedio Ciclo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Primer Semestre (2025-2)</td>
+                                <td class="center-text">7 / 7</td>
+                                <td class="center-text"><strong>9.6</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- SUB-SECCIÓN: TIRA DE MATERIA -->
+                <div id="tab-tira" class="tab-content hidden">
+                    <div class="panel-header">
+                        <h2>Tira de Materia Autorizada</h2>
+                        <p>Carga académica asignada para el periodo escolar actual</p>
+                    </div>
+                    <ol style="padding-left: 20px; line-height: 1.8; color: #334155; font-size: 14px;">
+                        <li>Programación Orientada a Objetos</li>
+                        <li>Cálculo Integral</li>
+                        <li>Álgebra Lineal</li>
+                        <li>Contabilidad</li>
+                        <li>Fundamentos de Programación</li>
+                        <li>Química</li>
+                        <li>Probabilidad</li>
+                    </ol>
+                </div>
+
+                <!-- SECCIÓN: USUARIO (INFORMACIÓN DEL ESTUDIANTE) -->
                 <div id="tab-usuario" class="tab-content hidden">
                     <div class="panel-header">
                         <h2>Información General del Estudiante</h2>
                         <p>Historial y estatus académico actual en el sistema</p>
                     </div>
-                    
-                    <div class="card profile-card" style="background: transparent; border: none; padding: 0;">
-                        <div class="profile-info">
-                            <p><strong>Nombre Completo:</strong> Yovani Vázquez Guzmán</p>
-                            <p><strong>Matrícula Escolar:</strong> 2025452046</p>
-                            <p><strong>Carrera Universitaria:</strong> Ingeniería en Sistemas Computacionales</p>
-                            <p><strong>Semestre Actual:</strong> 2do Semestre</p>
-                            <p><strong>Estatus del Alumno:</strong> Regular</p>
-                            <p><strong>Periodo de Ingreso:</strong> 2025-2</p>
-                            <br>
-                            <h3 style="color: #14532d; font-size: 16px; margin-bottom: 10px;">Resumen de Créditos</h3>
-                            <p><strong>Promedio General Acumulado:</strong> 9.6</p>
-                            <p><strong>Créditos Totales Obtenidos:</strong> 60 créditos</p>
-                        </div>
+                    <div class="profile-info">
+                        <p><strong>Nombre Completo:</strong> Yovani Vázquez Guzmán</p>
+                        <p><strong>Matrícula Escolar:</strong> 2025452046</p>
+                        <p><strong>Carrera Universitaria:</strong> Ingeniería en Sistemas Computacionales</p>
+                        <p><strong>Semestre Actual:</strong> 2do Semestre</p>
+                        <p><strong>Estatus del Alumno:</strong> Regular</p>
+                        <p><strong>Periodo de Ingreso:</strong> 2025-2</p>
                     </div>
                 </div>
 
