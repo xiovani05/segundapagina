@@ -6,13 +6,13 @@ const USUARIO_VALIDO = {
 
 // Tus 7 materias con las especificaciones exactas de calificaciones
 const MATERIAS_DATA = [
-    { nombre: "Programación Orientada a Objetos", p1: 96, p2: 97, p3: 95 },
-    { nombre: "Cálculo Integral", p1: 95, p2: 98, p3: 95 },
-    { nombre: "Álgebra Lineal", p1: 97, p2: 95, p3: 95 },
-    { nombre: "Contabilidad", p1: 98, p2: 96, p3: 100 },
-    { nombre: "Fundamentos de Programación", p1: 95, p2: 99, p3: 100 },
-    { nombre: "Química", p1: 96, p2: 97, p3: 85 },
-    { nombre: "Probabilidad", p1: 97, p2: 95, p3: 85 }
+    { nombre: "Programación Orientada a Objetos", p1: 100, p2: 100, p3: 95 },
+    { nombre: "Cálculo Integral", p1: 91, p2: 98, p3: 95 },
+    { nombre: "Álgebra Lineal", p1: 100, p2: 95, p3: 95 },
+    { nombre: "Contabilidad", p1: 100, p2: 96, p3: 100 },
+    { nombre: "Fundamentos de Programación", p1: 100, p2: 99, p3: 100 },
+    { nombre: "Química", p1: 96, p2: 100, p3: 85 },
+    { nombre: "Probabilidad", p1: 100, p2: 95, p3: 100 }
 ];
 
 // Captura de elementos de la interfaz
