@@ -62,14 +62,11 @@
                 <p class="user-semester-display">2do Semestre — Regular</p>
             </div>
 
-            <!-- MENÚ LATERAL CON SUBMENÚ DE REPORTES -->
             <nav class="sidebar-menu">
                 <button class="menu-btn" data-tab="tab-registro">Registro</button>
                 
-                <!-- Botón contenedor de Reportes -->
                 <div class="submenu-container">
                     <button class="menu-btn active" id="btn-reportes-main">Reportes</button>
-                    <!-- Las opciones de tu imagen -->
                     <div class="submenu-content" id="reportes-submenu">
                         <button class="submenu-item active" data-tab="tab-parciales">▸ Calificaciones Parciales</button>
                         <button class="submenu-item" data-tab="tab-finales">▸ Calificaciones Finales</button>
@@ -83,35 +80,46 @@
             </nav>
         </aside>
 
-        <!-- PANEL DE INFORMACIÓN CENTRAL (CONTENEDOR BLANCO) -->
+        <!-- PANEL DE INFORMACIÓN CENTRAL -->
         <main class="teschi-main-panel">
             <div class="white-content-box">
                 
                 <!-- SECCIÓN: REGISTRO (PÁGINA EN BLANCO) -->
-                <div id="tab-registro" class="tab-content hidden">
-                    <!-- Espacio en blanco solicitado -->
-                </div>
+                <div id="tab-registro" class="tab-content hidden"></div>
 
-                <!-- SUB-SECCIÓN: CALIFICACIONES PARCIALES (TU TABLA DE 7 MATERIAS) -->
+                <!-- SUB-SECCIÓN: CALIFICACIONES PARCIALES (BOLETA IDÉNTICA A LA IMAGEN) -->
                 <div id="tab-parciales" class="tab-content">
-                    <div class="panel-header">
-                        <h2>Boleta de Calificaciones Parciales</h2>
-                        <p>Ciclo Escolar Vigente — Desglose Automático de Promedios</p>
+                    
+                    <!-- Encabezado con recuadro verde claro de la imagen -->
+                    <div class="boleta-header-box">
+                        <span class="icon-folder">📁</span> Calificaciones
+                    </div>
+
+                    <!-- Barra de selección de periodo institucional -->
+                    <div class="periodo-selector-bar">
+                        <span class="periodo-lbl">2026-1</span>
+                        <div class="periodo-dropdown-sim">
+                            <span>Selecciona un periodo para ver tus calificaciones | 2026-1</span>
+                            <span class="arrow-down">⌂</span>
+                        </div>
                     </div>
                     
+                    <!-- Tabla estructurada con las nuevas columnas -->
                     <div class="table-responsive">
-                        <table class="teschi-table">
+                        <table class="teschi-table-official">
                             <thead>
                                 <tr>
-                                    <th>Materia</th>
-                                    <th class="center-text">Parcial 1</th>
-                                    <th class="center-text">Parcial 2</th>
-                                    <th class="center-text">Parcial 3</th>
-                                    <th class="center-text">Promedio Final</th>
+                                    <th class="col-num">N°</th>
+                                    <th class="col-docente">Docente</th>
+                                    <th class="col-materia">Materia</th>
+                                    <th class="col-parcial">Primer Parcial</th>
+                                    <th class="col-parcial">Segundo Parcial</th>
+                                    <th class="col-parcial">Tercer Parcial</th>
+                                    <th class="col-grupo">Grupo</th>
                                 </tr>
                             </thead>
                             <tbody id="grades-table-body">
-                                <!-- Filas dinámicas -->
+                                <!-- Las filas se generan automáticamente desde script.js -->
                             </tbody>
                         </table>
                     </div>
@@ -119,67 +127,30 @@
 
                 <!-- SUB-SECCIÓN: CALIFICACIONES FINALES -->
                 <div id="tab-finales" class="tab-content hidden">
-                    <div class="panel-header">
-                        <h2>Calificaciones Finales</h2>
-                        <p>Cierre de actas y evaluaciones definitivas del semestre</p>
-                    </div>
-                    <p style="color: #64748b; font-style: italic;">No hay calificaciones finales asentadas en el sistema todavía.</p>
+                    <div class="boleta-header-box"><span class="icon-folder">📁</span> Calificaciones Finales</div>
+                    <p style="color: #64748b; font-style: italic; margin-top: 15px;">No hay calificaciones finales asentadas en el sistema todavía.</p>
                 </div>
 
                 <!-- SUB-SECCIÓN: HISTORIAL ACADÉMICO -->
                 <div id="tab-historial" class="tab-content hidden">
-                    <div class="panel-header">
-                        <h2>Historial Académico</h2>
-                        <p>Registro de ciclos escolares anteriores aprobados</p>
-                    </div>
-                    <table class="teschi-table">
-                        <thead>
-                            <tr>
-                                <th>Periodo Semestral</th>
-                                <th class="center-text">Materias Aprobadas</th>
-                                <th class="center-text">Promedio Ciclo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Primer Semestre (2025-2)</td>
-                                <td class="center-text">7 / 7</td>
-                                <td class="center-text"><strong>9.6</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="boleta-header-box"><span class="icon-folder">📁</span> Historial Académico</div>
+                    <p style="color: #64748b; font-style: italic; margin-top: 15px;">Ciclo 2025-2 completado con promedio satisfactorio de 9.6.</p>
                 </div>
 
                 <!-- SUB-SECCIÓN: TIRA DE MATERIA -->
                 <div id="tab-tira" class="tab-content hidden">
-                    <div class="panel-header">
-                        <h2>Tira de Materia Autorizada</h2>
-                        <p>Carga académica asignada para el periodo escolar actual</p>
-                    </div>
-                    <ol style="padding-left: 20px; line-height: 1.8; color: #334155; font-size: 14px;">
-                        <li>Programación Orientada a Objetos</li>
-                        <li>Cálculo Integral</li>
-                        <li>Álgebra Lineal</li>
-                        <li>Contabilidad</li>
-                        <li>Fundamentos de Programación</li>
-                        <li>Química</li>
-                        <li>Probabilidad</li>
-                    </ol>
+                    <div class="boleta-header-box"><span class="icon-folder">📁</span> Tira de materia</div>
+                    <p style="color: #64748b; font-style: italic; margin-top: 15px;">Carga académica vigente autorizada para el periodo 2026-1.</p>
                 </div>
 
-                <!-- SECCIÓN: USUARIO (INFORMACIÓN DEL ESTUDIANTE) -->
+                <!-- SECCIÓN: USUARIO -->
                 <div id="tab-usuario" class="tab-content hidden">
-                    <div class="panel-header">
-                        <h2>Información General del Estudiante</h2>
-                        <p>Historial y estatus académico actual en el sistema</p>
-                    </div>
-                    <div class="profile-info">
+                    <div class="boleta-header-box"><span class="icon-folder">👤</span> Información del Estudiante</div>
+                    <div class="profile-info" style="margin-top: 20px; line-height: 1.8;">
                         <p><strong>Nombre Completo:</strong> Yovani Vázquez Guzmán</p>
-                        <p><strong>Matrícula Escolar:</strong> 2025452046</p>
-                        <p><strong>Carrera Universitaria:</strong> Ingeniería en Sistemas Computacionales</p>
-                        <p><strong>Semestre Actual:</strong> 2do Semestre</p>
-                        <p><strong>Estatus del Alumno:</strong> Regular</p>
-                        <p><strong>Periodo de Ingreso:</strong> 2025-2</p>
+                        <p><strong>Matrícula:</strong> 2025452046</p>
+                        <p><strong>Carrera:</strong> Ingeniería en Sistemas Computacionales</p>
+                        <p><strong>Semestre:</strong> 2do Semestre</p>
                     </div>
                 </div>
 
