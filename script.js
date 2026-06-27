@@ -1,10 +1,10 @@
 // Base de datos simulada del estudiante
 const USUARIO_VALIDO = {
     matricula: "2025452046",
-    password: "2025452046"
+    password: "alumno123"
 };
 
-// Tus 7 materias con las especificaciones exactas de calificaciones
+// Tus 7 materias con calificaciones
 const MATERIAS_DATA = [
     { nombre: "Programación Orientada a Objetos", p1: 96, p2: 97, p3: 95 },
     { nombre: "Cálculo Integral", p1: 95, p2: 98, p3: 95 },
@@ -15,7 +15,6 @@ const MATERIAS_DATA = [
     { nombre: "Probabilidad", p1: 97, p2: 95, p3: 85 }
 ];
 
-// Captura de elementos principales de la interfaz
 const loginForm = document.getElementById('login-form');
 const loginPageContainer = document.getElementById('login-page-container');
 const dashboardContainer = document.getElementById('dashboard-container');
@@ -23,62 +22,78 @@ const loginError = document.getElementById('login-error');
 const gradesTableBody = document.getElementById('grades-table-body');
 const logoutBtn = document.getElementById('logout-btn');
 
-// Manejador del Inicio de Sesión
+// Elementos del submenú
+const btnReportesMain = document.getElementById('btn-reportes-main');
+const reportesSubmenu = document.getElementById('reportes-submenu');
+
+// Iniciar sesión
 loginForm.addEventListener('submit', function(e) {
     e.preventDefault(); 
-    
     const matriculaIngresada = document.getElementById('matricula').value.trim();
     const passwordIngresada = document.getElementById('password').value;
 
     if (matriculaIngresada === USUARIO_VALIDO.matricula && passwordIngresada === USUARIO_VALIDO.password) {
-        // Acceso correcto: Ocultar login y mostrar dashboard
         loginPageContainer.classList.add('hidden');
         dashboardContainer.classList.remove('hidden');
         
-        // Cargar por defecto la pestaña de reportes (calificaciones)
-        activarPestana('tab-reportes');
+        // Abre el submenú de Reportes por defecto y muestra parciales
+        reportesSubmenu.classList.remove('hidden');
+        activarContenidoCentral('tab-parciales');
         cargarCalificaciones();
     } else {
         loginError.textContent = "Matrícula o contraseña incorrectas. Inténtalo de nuevo.";
     }
 });
 
-// LÓGICA DE LA NAVEGACIÓN LATERAL INTERACTIVA
-const menuButtons = document.querySelectorAll('.sidebar-menu .menu-btn:not(#logout-btn)');
+// INTERACCIÓN DE BOTONES PRINCIPALES (Registro, Reportes, Usuario)
+const mainButtons = document.querySelectorAll('.sidebar-menu > .menu-btn:not(#logout-btn)');
+const submenuItems = document.querySelectorAll('.submenu-item');
 
-menuButtons.forEach(button => {
+mainButtons.forEach(button => {
     button.addEventListener('click', function() {
-        // Quitar la clase 'active' de todos los botones
-        menuButtons.forEach(btn => btn.classList.remove('active'));
-        
-        // Agregar la clase 'active' al botón presionado
+        mainButtons.forEach(btn => btn.classList.remove('active'));
         this.classList.add('active');
         
-        // Obtener el ID del apartado correspondiente
-        const targetTabId = this.getAttribute('data-tab');
-        
-        // Activar la vista del apartado correspondiente
-        activarPestana(targetTabId);
+        // Si se hace clic en Reportes, despliega o repliega el submenú
+        if (this.id === 'btn-reportes-main') {
+            reportesSubmenu.classList.toggle('hidden');
+            // Al abrir Reportes, activa automáticamente la primera opción interna
+            submenuItems.forEach(item => item.classList.remove('active'));
+            submenuItems[0].classList.add('active');
+            activarContenidoCentral('tab-parciales');
+        } else {
+            // Si hace clic en Registro o Usuario, oculta el submenú de Reportes automáticamente
+            reportesSubmenu.classList.add('hidden');
+            const targetTabId = this.getAttribute('data-tab');
+            activarContenidoCentral(targetTabId);
+        }
     });
 });
 
-// Función para alternar la visibilidad de los contenidos
-function activarPestana(tabId) {
-    const allTabs = document.querySelectorAll('.tab-content');
-    allTabs.forEach(tab => {
-        tab.classList.add('hidden'); // Ocultar todas
+// INTERACCIÓN DE LAS OPCIONES INTERNAS DEL SUBMENÚ (Calificaciones parciales, finales, etc)
+submenuItems.forEach(item => {
+    item.addEventListener('click', function() {
+        submenuItems.forEach(si => si.classList.remove('active'));
+        this.classList.add('active');
+        
+        const targetTabId = this.getAttribute('data-tab');
+        activarContenidoCentral(targetTabId);
     });
+});
+
+// Cambiar visibilidad de las ventanas de información
+function activarContenidoCentral(tabId) {
+    const allTabs = document.querySelectorAll('.tab-content');
+    allTabs.forEach(tab => tab.classList.add('hidden'));
     
     const targetTab = document.getElementById(tabId);
     if (targetTab) {
-        targetTab.classList.remove('hidden'); // Mostrar solo la seleccionada
+        targetTab.classList.remove('hidden');
     }
 }
 
-// Función para inyectar la tabla de calificaciones
 function cargarCalificaciones() {
     gradesTableBody.innerHTML = ""; 
-    
     MATERIAS_DATA.forEach(materia => {
         const promedioFinal = ((materia.p1 + materia.p2 + materia.p3) / 3).toFixed(1);
         const fila = document.createElement('tr');
@@ -93,7 +108,6 @@ function cargarCalificaciones() {
     });
 }
 
-// Botón de Cerrar Sesión
 logoutBtn.addEventListener('click', function() {
     dashboardContainer.classList.add('hidden');
     loginPageContainer.classList.remove('hidden');
