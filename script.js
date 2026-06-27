@@ -6,13 +6,13 @@ const USUARIO_VALIDO = {
 
 // Tus 7 materias oficiales del TESCHI con calificaciones reales
 const MATERIAS_DATA = [
-    { num: 1, docente: "GARDUÑO FLORES FRANCISCO ADRIÁN", materia: "FUNDAMENTOS DE PROGRAMACIÓN", p1: 98, p2: 90, p3: 100, grupo: "1ISC21" },
+    { num: 1, docente: "GARDUÑO FLORES FRANCISCO ADRIÁN", materia: "FUNDAMENTOS DE PROGRAMACIÓN", p1: 94, p2: 96, p3: 100, grupo: "1ISC21" },
     { num: 2, docente: "RAMIREZ HIDALGO JUAN ALBERTO", materia: "ÁLGEBRA LINEAL", p1: 100, p2: 97, p3: 95, grupo: "2ISC11" },
     { num: 3, docente: "CRUZ MONTIEL MARIO", materia: "CÁLCULO INTEGRAL", p1: 100, p2: 100, p3: 95, grupo: "2ISC11" },
-    { num: 4, docente: "ZAMORA TÉLLEZ MERCEDES DAMARIS", materia: "CONTABILIDAD FINANCIERA", p1: 100, p2: 99, p3: 100, grupo: "2ISC11" },
-    { num: 5, docente: "MENDEZ CALVA JULIO CESAR", materia: "PROBABILIDAD Y ESTADÍSTICA", p1: 96, p2: 98, p3: 94, grupo: "2ISC11" },
-    { num: 6, docente: "LLINAS PEREZ MARCO ANTONIO", materia: "PROGRAMACIÓN ORIENTADA A OBJETOS", p1: 90, p2: 100, p3: 100, grupo: "2ISC11" },
-    { num: 7, docente: "SOLIS PEREZ SHARON", materia: "QUÍMICA", p1: 95, p2: 100, p3: 99, grupo: "2ISC11" }
+    { num: 4, docente: "ZAMORA TÉLLEZ MERCEDES DAMARIS", materia: "CONTABILIDAD FINANCIERA", p1: 100, p2: 98, p3: 100, grupo: "2ISC11" },
+    { num: 5, docente: "MENDEZ CALVA JULIO CESAR", materia: "PROBABILIDAD Y ESTADÍSTICA", p1: 96, p2: 98, p3: 100, grupo: "2ISC11" },
+    { num: 6, docente: "LLINAS PEREZ MARCO ANTONIO", materia: "PROGRAMACIÓN ORIENTADA A OBJETOS", p1: 86, p2: 100, p3: 100, grupo: "2ISC11" },
+    { num: 7, docente: "SOLIS PEREZ SHARON", materia: "QUÍMICA", p1: 100, p2: 100, p3: 100, grupo: "2ISC11" }
 ];
 
 const loginForm = document.getElementById('login-form');
