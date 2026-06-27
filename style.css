@@ -1,9 +1,275 @@
-/* DISEÑO ADICIONAL PARA LA BOLETA REAL TESCHI */
+:root {
+    --teschi-green: #82c373; 
+    --teschi-dark-green: #68ab59; 
+    --teschi-bg-light: #d8eed3; 
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: var(--teschi-bg-light);
+    color: #333;
+    min-height: 100vh;
+}
+
+/* INTERFAZ DE LOGIN */
+#login-page-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 10px;
+}
+
+.teschi-header {
+    background-color: var(--teschi-green);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    color: var(--white);
+    border: 1px solid var(--white);
+}
+
+.logo-container {
+    text-align: left;
+    margin-bottom: -10px;
+}
+
+.teschi-logo {
+    height: 55px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.teschi-header h1 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.siia-title {
+    font-size: 14px;
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+.login-main-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    background-color: var(--white);
+    padding: 30px 15px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+}
+
+.teschi-mascot {
+    max-width: 140px;
+    height: auto;
+}
+
+.teschi-login-box {
+    background-color: var(--teschi-dark-green);
+    padding: 20px;
+    border-radius: 15px;
+    width: 220px;
+}
+
+.teschi-login-box .input-group {
+    margin-bottom: 12px;
+}
+
+.teschi-login-box input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #777;
+    border-radius: 5px;
+    text-align: center;
+    outline: none;
+    font-size: 12px;
+}
+
+.btn-teschi-submit {
+    width: 100%;
+    padding: 8px;
+    background-color: #ededed;
+    border: 1px solid #999;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.forgot-link {
+    display: block;
+    text-align: center;
+    color: #1e40af;
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+.teschi-footer {
+    background-color: var(--teschi-green);
+    border-radius: 5px;
+    padding: 12px;
+    text-align: center;
+    color: var(--white);
+    font-size: 11px;
+    border: 1px solid var(--white);
+}
+
+.demo-cred {
+    margin-top: 5px;
+    color: #14532d;
+}
+
+.error-msg {
+    color: #fca5a5;
+    font-size: 11px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+/* INTERFAZ DEL PANEL PRIVADO */
+.teschi-dashboard {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--teschi-green); 
+    width: 100%;
+}
+
+.teschi-sidebar {
+    width: 240px;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.sidebar-logo img {
+    max-width: 110px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.sidebar-user-info {
+    color: var(--white);
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.user-matricula-display {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.divider-line {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.4);
+    margin: 8px 0 12px 0;
+}
+
+.user-name-display {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.user-career-display {
+    font-size: 11px;
+    margin-bottom: 4px;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.menu-btn {
+    width: 100%;
+    padding: 10px 12px;
+    background: linear-gradient(to bottom, #a3dc95, #7dbb6e);
+    color: var(--white);
+    border: 1px solid #ffffff;
+    text-align: left;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.menu-btn.active {
+    background: linear-gradient(to bottom, #7cbd6c, #6ba75c);
+}
+
+.logout-style {
+    background: linear-gradient(to bottom, #fca5a5, #ef4444);
+    color: white;
+}
+
+/* ELEMENTOS BLANCOS DEL ACORDEÓN DESPLEGABLE */
+.submenu-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+.submenu-item {
+    width: 100%;
+    padding: 8px 15px;
+    background-color: #ffffff;
+    color: #757575; 
+    border: none;
+    border-bottom: 1px solid #f1f5f9;
+    text-align: left;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.submenu-item:hover {
+    background-color: #f8fafc;
+}
+
+.submenu-item.active {
+    font-weight: bold;
+    color: #15803d;
+    background-color: #f0fdf4;
+}
+
+/* MARCO CENTRAL BLANCO */
+.teschi-main-panel {
+    flex-grow: 1;
+    background-color: var(--teschi-green);
+    padding: 20px 20px 20px 0;
+    display: flex;
+}
+
+.white-content-box {
+    background-color: var(--white);
+    width: 100%;
+    border-radius: 4px;
+    padding: 25px;
+    min-height: 85vh;
+}
+
+/* CONTENEDOR BOLETA REAL */
 .boleta-header-box {
     border: 1px solid #94d385;
     border-radius: 6px;
     padding: 10px 15px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #166534;
     display: flex;
@@ -12,19 +278,15 @@
     margin-bottom: 20px;
 }
 
-.icon-folder {
-    font-size: 18px;
-}
-
 .periodo-selector-bar {
-    background-color: #c2e7be; /* Verde claro del selector de la imagen */
+    background-color: #c2e7be;
     padding: 6px 12px;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
     gap: 4px;
     margin-bottom: 15px;
-    border: 1px solid #a3dc95;
+    border: 1px solid #94d385;
 }
 
 .periodo-lbl {
@@ -44,23 +306,20 @@
     color: #475569;
 }
 
-.arrow-down {
-    font-size: 8px;
-    transform: rotate(180deg);
-    display: inline-block;
+/* TABLA INSTITUCIONAL DEL TESCHI */
+.table-responsive {
+    overflow-x: auto;
 }
 
-/* TABLA OFICIAL */
 .teschi-table-official {
     width: 100%;
     border-collapse: collapse;
-    font-size: 11px; /* Letra compacta institucional */
+    font-size: 11px;
     border: 1px solid #cbd5e1;
 }
 
 .teschi-table-official th {
-    background-color: #3b82f6; /* Azul / Gris de encabezado */
-    background: linear-gradient(to bottom, #4f81bd, #385d8a); /* Tono azulado/gris metálico de la captura */
+    background: linear-gradient(to bottom, #4f81bd, #385d8a);
     color: #ffffff;
     padding: 8px 6px;
     font-weight: bold;
@@ -70,12 +329,11 @@
 
 .teschi-table-official td {
     padding: 8px 6px;
-    border: 1px solid #e2e8f0;
-    color: #334155;
+    border: 1px solid #cbd5e1;
 }
 
 .teschi-table-official tr:nth-child(even) {
-    background-color: #f8fafc; /* Alternancia de líneas grises */
+    background-color: #f8fafc;
 }
 
 .col-num { width: 5%; }
@@ -84,5 +342,27 @@
 .col-parcial { width: 10%; }
 .col-grupo { width: 10%; }
 
-.text-left { text-align: left !important; }
+.center-text { text-align: center; }
+.text-left { text-align: left; }
 .font-small { font-size: 10px; }
+
+/* UTILERÍAS GLOBALES INMUTABLES */
+.hidden {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .teschi-dashboard {
+        flex-direction: column;
+    }
+    .teschi-sidebar {
+        width: 100%;
+    }
+    .teschi-main-panel {
+        padding: 15px;
+    }
+    .login-main-content {
+        flex-direction: column;
+        padding: 20px;
+    }
+}
