@@ -1,7 +1,7 @@
 // Base de datos de acceso autorizada
 const USUARIO_VALIDO = {
     matricula: "2025452046",
-    password: "456"
+    password: "alumno123"
 };
 
 // Matriz de materias oficiales del SIIA
@@ -15,37 +15,35 @@ const MATERIAS_DATA = [
     { num: 7, docente: "SOLIS PEREZ SHARON", materia: "QUÍMICA", p1: 95, p2: 95, p3: 85, grupo: "2ISC11" }
 ];
 
-// Esperar a que cargue el árbol HTML por completo
-window.addEventListener('DOMContentLoaded', () => {
-    const lForm = document.getElementById('login-form');
-    if (lForm) {
-        lForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const inputMatricula = document.getElementById('matricula').value.trim();
-            const inputPassword = document.getElementById('password').value;
+// PROCESO DE LOGUEO DIRECTO (SIN DOMCONTENTLOADED)
+const loginForm = document.getElementById('login-form');
 
-            if (inputMatricula === USUARIO_VALIDO.matricula && inputPassword === USUARIO_VALIDO.password) {
-                document.getElementById('login-page-container').classList.add('hidden');
-                document.getElementById('dashboard-container').classList.remove('hidden');
-                
-                // Configuración de interfaz al ingresar
-                document.getElementById('reportes-submenu').classList.remove('hidden');
-                resetearEstilosMenu();
-                
-                const btnRep = document.getElementById('btn-reportes-main');
-                if(btnRep) btnRep.classList.add('active');
-                
-                const subPar = document.getElementById('sub-item-parciales');
-                if(subPar) subPar.classList.add('active');
-                
-                mostrarSeccionContenido('tab-parciales');
-                construirTablaGrd();
-            } else {
-                document.getElementById('login-error').textContent = "Matrícula o contraseña incorrectas. Inténtalo de nuevo.";
-            }
-        });
-    }
-});
+if (loginForm) {
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const inputMatricula = document.getElementById('matricula').value.trim();
+        const inputPassword = document.getElementById('password').value;
+
+        if (inputMatricula === USUARIO_VALIDO.matricula && inputPassword === USUARIO_VALIDO.password) {
+            // Ocultar login y mostrar dashboard
+            document.getElementById('login-page-container').classList.add('hidden');
+            document.getElementById('dashboard-container').classList.remove('hidden');
+            
+            // Configurar menú inicial
+            document.getElementById('reportes-submenu').classList.remove('hidden');
+            resetearEstilosMenu();
+            
+            document.getElementById('btn-reportes-main').classList.add('active');
+            document.getElementById('sub-item-parciales').classList.add('active');
+            
+            mostrarSeccionContenido('tab-parciales');
+            construirTablaGrd();
+        } else {
+            document.getElementById('login-error').textContent = "Matrícula o contraseña incorrectas. Inténtalo de nuevo.";
+        }
+    });
+}
 
 // Navegación principal lateral
 function navegarALink(tabId) {
