@@ -366,3 +366,65 @@ body {
         padding: 20px;
     }
 }
+
+```css
+/* DISEÑO DEL FORMULARIO DE ACTUALIZACIÓN DE DATOS (SIIA) */
+.teschi-form-datos {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-section-title {
+    color: #1e40af; /* Azul para los títulos de sección: Alumno, Domicilio */
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 2px solid #3b82f6;
+    padding-bottom: 4px;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+/* Cuadrícula de 3 columnas para PC / Pantallas grandes */
+.form-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.f-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.f-group label {
+    font-size: 11px;
+    font-weight: bold;
+    color: #475569;
+}
+
+.f-group input, .f-group select {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 12px;
+    background-color: #f8fafc;
+    color: #334155;
+    outline: none;
+}
+
+.f-group input:focus, .f-group select:focus {
+    border-color: #3b82f6;
+    background-color: #ffffff;
+}
+
+/* Adaptación responsiva para celulares (se hace una sola columna ordenada) */
+@media (max-width: 600px) {
+    .form-grid-3 {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
