@@ -1,7 +1,7 @@
 // Base de datos simulada del estudiante
 const USUARIO_VALIDO = {
     matricula: "2025452046",
-    password: "2025"
+    password: "2025452046"
 };
 
 // Tus 7 materias oficiales del TESCHI con calificaciones reales
