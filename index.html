@@ -5,156 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TESCHI - Portal de Calificaciones</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* ESTILOS EXCLUSIVOS PARA EL VISOR DE KARDEX */
-        .kardex-visor-bar {
-            background-color: #e6e6e1;
-            border: 1px solid #b5b5b0;
-            padding: 6px 12px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 11px;
-            color: #444;
-            margin-bottom: 20px;
-            border-radius: 3px;
-        }
-        .kardex-input-sim {
-            width: 30px; padding: 2px; text-align: center; border: 1px solid #aaa; font-size: 11px;
-        }
-        .kardex-search-sim {
-            width: 80px; padding: 2px; border: 1px solid #aaa; font-size: 11px;
-        }
-        .kardex-document-body {
-            border: 1px solid #cbd5e1;
-            padding: 20px;
-            background-color: #ffffff;
-            color: #000000;
-        }
-        .kardex-logos-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .kardex-header-text {
-            text-align: center;
-            flex-grow: 1;
-            font-size: 10px;
-            font-weight: bold;
-            line-height: 1.3;
-        }
-        .kardex-date-box {
-            font-size: 10px;
-            text-align: right;
-            margin-bottom: 15px;
-        }
-        .kardex-student-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            font-size: 11px;
-            margin-bottom: 20px;
-        }
-        .kardex-val-underlined {
-            font-weight: bold;
-            border-bottom: 1px solid #000;
-            display: inline-block;
-            padding-left: 5px;
-        }
-        .kardex-stats-container {
-            display: flex;
-            gap: 0;
-            border: 1px solid #000;
-            margin-bottom: 15px;
-        }
-        .kardex-stats-main-block {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .kardex-stats-title-green {
-            background-color: #008000;
-            color: #ffffff;
-            text-align: center;
-            font-size: 11px;
-            font-weight: bold;
-            padding: 4px;
-            border-bottom: 1px solid #000;
-        }
-        .kardex-stats-sub-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            text-align: center;
-            font-size: 10px;
-            font-weight: bold;
-            background-color: #008000;
-            color: white;
-            border-bottom: 1px solid #000;
-        }
-        .kardex-stats-sub-row > div {
-            padding: 4px;
-            border-right: 1px solid #000;
-        }
-        .kardex-stats-sub-row > div:last-child {
-            border-right: none;
-        }
-        .kardex-columns-data-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            font-size: 10px;
-            background-color: #ffffff;
-        }
-        .kardex-col-box {
-            border-right: 1px solid #000;
-            padding: 8px 5px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .kardex-col-box:last-child {
-            border-right: none;
-        }
-        .kardex-item-row {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px dashed #aaa;
-            padding-bottom: 2px;
-        }
-        .kardex-promedio-sidebar {
-            width: 140px;
-            background-color: #008000;
-            color: white;
-            text-align: center;
-            border-left: 1px solid #000;
-            display: flex;
-            flex-direction: column;
-            flex-shrink: 0;
-        }
-        .kardex-promedio-title {
-            font-size: 11px;
-            font-weight: bold;
-            padding: 6px;
-            border-bottom: 1px solid #000;
-        }
-        .kardex-promedio-number-box {
-            background-color: #ffffff;
-            color: #000000;
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 38px;
-            font-weight: bold;
-        }
-        @media (max-width: 768px) {
-            .kardex-student-grid { grid-template-columns: 1fr; }
-            .kardex-stats-container { flex-direction: column; }
-            .kardex-columns-data-grid { grid-template-columns: 1fr; }
-            .kardex-col-box { border-right: none; border-bottom: 1px solid #000; }
-            .kardex-promedio-sidebar { width: 100%; border-left: none; border-top: 1px solid #000; height: 90px; }
-        }
-    </style>
 </head>
 <body>
 
@@ -252,4 +102,77 @@
                             <thead>
                                 <tr>
                                     <th class="col-num">N°</th>
-                                    
+                                    <th class="col-docente">Docente</th>
+                                    <th class="col-materia">Materia</th>
+                                    <th class="col-parcial">Primer Parcial</th>
+                                    <th class="col-parcial">Segundo Parcial</th>
+                                    <th class="col-parcial">Tercer Parcial</th>
+                                    <th class="col-grupo">Grupo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="grades-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- SUB-SECCIÓN: CALIFICACIONES FINALES (LA NUEVA TABLA QUE ME PEDISTE) -->
+                <div id="tab-finales" class="tab-content hidden">
+                    <div class="boleta-header-box"><span class="icon-folder">📁</span> Calificaciones</div>
+                    <div class="periodo-selector-bar">
+                        <span class="periodo-lbl">2026-1</span>
+                        <div class="periodo-dropdown-sim">
+                            <span>Selecciona un periodo para ver tus calificaciones | 2026-1</span>
+                            <span class="arrow-down">⌂</span>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="teschi-table-official">
+                            <thead>
+                                <tr>
+                                    <th class="col-num">N°</th>
+                                    <th class="col-docente">Docente</th>
+                                    <th class="col-materia">Materia</th>
+                                    <th class="col-parcial">Primera vuelta</th>
+                                    <th class="col-parcial">Segunda vuelta</th>
+                                    <th class="col-grupo">Grupo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="final-grades-table-body">
+                                <!-- Las filas de actas finales se inyectan con JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- SUB-SECCIÓN: HISTORIAL ACADÉMICO -->
+                <div id="tab-historial" class="tab-content hidden">
+                    <div class="boleta-header-box"><span class="icon-folder">📁</span> Historial Académico</div>
+                    <p style="color: #64748b; font-style: italic; margin-top: 15px;">Ciclo 2025-2 completado con promedio satisfactorio de 9.6.</p>
+                </div>
+
+                <!-- SUB-SECCIÓN: TIRA DE MATERIA -->
+                <div id="tab-tira" class="tab-content hidden">
+                    <div class="boleta-header-box"><span class="icon-folder">📁</span> Tira de materia</div>
+                    <p style="color: #64748b; font-style: italic; margin-top: 15px;">Carga académica vigente autorizada para el periodo 2026-1.</p>
+                </div>
+
+                <!-- SECCIÓN: USUARIO -->
+                <div id="tab-usuario" class="tab-content hidden">
+                    <div class="boleta-header-box"><span class="icon-folder">👤</span> Información General del Estudiante</div>
+                    <div class="profile-info" style="margin-top: 20px; line-height: 1.8; font-size: 14px; color: #334155;">
+                        <p><strong>Nombre Completo:</strong> Yovani Vázquez Guzmán</p>
+                        <p><strong>Matrícula Escolar:</strong> 2025452046</p>
+                        <p><strong>Carrera Universitaria:</strong> Ingeniería en Sistemas Computacionales</p>
+                        <p><strong>Semestre Actual:</strong> 2do Semestre</p>
+                        <p><strong>Estatus del Alumno:</strong> Regular</p>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
