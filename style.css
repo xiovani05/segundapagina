@@ -1,7 +1,7 @@
 :root {
-    --teschi-green: #ffffff; /* Verde claro del fondo institucional */
+    --teschi-green: #82c373; /* Verde claro del fondo institucional */
     --teschi-dark-green: #68ab59; /* Verde del cuadro de login y botones */
-    --teschi-bg-light: #d8eed3; /* Color de fondo general de la pantalla */
+    --teschi-bg-light: #ffffff; /* Color de fondo general de la pantalla */
     --white: #ffffff;
     --border-gray: #cbd5e1;
     --danger: #dc2626;
