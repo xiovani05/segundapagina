@@ -36,7 +36,7 @@ loginForm.addEventListener('submit', function(e) {
         loginPageContainer.classList.add('hidden');
         dashboardContainer.classList.remove('hidden');
         
-        // Abre el submenú de Reportes por defecto y muestra parciales
+        // Abre el submenú de Reportes por defecto y muestra parciales al entrar
         reportesSubmenu.classList.remove('hidden');
         activarContenidoCentral('tab-parciales');
         cargarCalificaciones();
@@ -54,15 +54,21 @@ mainButtons.forEach(button => {
         mainButtons.forEach(btn => btn.classList.remove('active'));
         this.classList.add('active');
         
-        // Si se hace clic en Reportes, despliega o repliega el submenú
+        // Si se hace clic en Reportes
         if (this.id === 'btn-reportes-main') {
+            // Alterna la visibilidad (si está oculto lo muestra, si está abierto lo cierra)
             reportesSubmenu.classList.toggle('hidden');
-            // Al abrir Reportes, activa automáticamente la primera opción interna
-            submenuItems.forEach(item => item.classList.remove('active'));
-            submenuItems[0].classList.add('active');
-            activarContenidoCentral('tab-parciales');
+            
+            // Si al alternar quedó visible, marcamos la primera opción (Parciales) como activa por defecto
+            if (!reportesSubmenu.classList.contains('hidden')) {
+                submenuItems.forEach(item => item.classList.remove('active'));
+                if (submenuItems.length > 0) {
+                    submenuItems[0].classList.add('active');
+                }
+                activarContenidoCentral('tab-parciales');
+            }
         } else {
-            // Si hace clic en Registro o Usuario, oculta el submenú de Reportes automáticamente
+            // Si hace clic en Registro o Usuario, ocultamos el submenú de Reportes
             reportesSubmenu.classList.add('hidden');
             const targetTabId = this.getAttribute('data-tab');
             activarContenidoCentral(targetTabId);
