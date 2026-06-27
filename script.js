@@ -1,18 +1,18 @@
 // Base de datos simulada del estudiante
 const USUARIO_VALIDO = {
-    matricula: "12345",
-    password: "alumno123"
+    matricula: "2025452046",
+    password: "2025452046"
 };
 
-// Tus 7 materias con calificaciones predefinidas de ejemplo para los 3 parciales
+// Tus 7 materias con las especificaciones exactas de calificaciones
 const MATERIAS_DATA = [
-    { nombre: "Programación Orientada a Objetos", p1: 9.0, p2: 8.5, p3: 10.0 },
-    { nombre: "Cálculo Integral", p1: 7.5, p2: 8.0, p3: 7.0 },
-    { nombre: "Álgebra Lineal", p1: 8.5, p2: 9.0, p3: 8.5 },
-    { nombre: "Contabilidad", p1: 10.0, p2: 9.5, p3: 9.0 },
-    { nombre: "Fundamentos de Programación", p1: 9.5, p2: 10.0, p3: 9.5 },
-    { nombre: "Química", p1: 8.0, p2: 7.5, p3: 8.5 },
-    { nombre: "Probabilidad", p1: 9.0, p2: 8.5, p3: 9.0 }
+    { nombre: "Programación Orientada a Objetos", p1: 96, p2: 97, p3: 95 },
+    { nombre: "Cálculo Integral", p1: 95, p2: 98, p3: 95 },
+    { nombre: "Álgebra Lineal", p1: 97, p2: 95, p3: 95 },
+    { nombre: "Contabilidad", p1: 98, p2: 96, p3: 100 },
+    { nombre: "Fundamentos de Programación", p1: 95, p2: 99, p3: 100 },
+    { nombre: "Química", p1: 96, p2: 97, p3: 85 },
+    { nombre: "Probabilidad", p1: 97, p2: 95, p3: 85 }
 ];
 
 // Captura de elementos de la interfaz
@@ -60,9 +60,9 @@ function cargarCalificaciones() {
         const fila = document.createElement('tr');
         fila.innerHTML = `
             <td><strong>${materia.nombre}</strong></td>
-            <td>${materia.p1.toFixed(1)}</td>
-            <td>${materia.p2.toFixed(1)}</td>
-            <td>${materia.p3.toFixed(1)}</td>
+            <td>${materia.p1}</td>
+            <td>${materia.p2}</td>
+            <td>${materia.p3}</td>
             <td class="final-grade">${promedioFinal}</td>
         `;
         
@@ -78,4 +78,3 @@ logoutBtn.addEventListener('click', function() {
     loginForm.reset();
     loginError.textContent = "";
 });
-
