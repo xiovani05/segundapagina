@@ -6,17 +6,18 @@
     <title>TESCHI - Portal de Calificaciones</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ESTILOS INTERNOS EXCLUSIVOS PARA EL VISOR DE KARDEX REPLICADO */
+        /* ESTILOS EXCLUSIVOS PARA EL VISOR DE KARDEX */
         .kardex-visor-bar {
             background-color: #e6e6e1;
             border: 1px solid #b5b5b0;
-            padding: 4px 8px;
+            padding: 6px 12px;
             display: flex;
             align-items: center;
             gap: 15px;
             font-size: 11px;
             color: #444;
             margin-bottom: 20px;
+            border-radius: 3px;
         }
         .kardex-input-sim {
             width: 30px; padding: 2px; text-align: center; border: 1px solid #aaa; font-size: 11px;
@@ -26,51 +27,51 @@
         }
         .kardex-document-body {
             border: 1px solid #cbd5e1;
-            padding: 25px;
+            padding: 20px;
             background-color: #ffffff;
             color: #000000;
-            font-family: Arial, Helvetica, sans-serif;
         }
         .kardex-logos-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .kardex-header-text {
             text-align: center;
             flex-grow: 1;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
             line-height: 1.3;
         }
         .kardex-date-box {
             font-size: 10px;
             text-align: right;
-            line-height: 1.3;
+            margin-bottom: 15px;
         }
         .kardex-student-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 8px;
             font-size: 11px;
-            margin-bottom: 25px;
-            line-height: 1.6;
+            margin-bottom: 20px;
         }
         .kardex-val-underlined {
             font-weight: bold;
             border-bottom: 1px solid #000;
             display: inline-block;
-            padding-bottom: 1px;
+            padding-left: 5px;
         }
         .kardex-stats-container {
             display: flex;
-            gap: 15px;
+            gap: 0;
             border: 1px solid #000;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
         .kardex-stats-main-block {
             flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         .kardex-stats-title-green {
             background-color: #008000;
@@ -92,7 +93,7 @@
             border-bottom: 1px solid #000;
         }
         .kardex-stats-sub-row > div {
-            padding: 3px;
+            padding: 4px;
             border-right: 1px solid #000;
         }
         .kardex-stats-sub-row > div:last-child {
@@ -101,11 +102,12 @@
         .kardex-columns-data-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            font-size: 11px;
+            font-size: 10px;
+            background-color: #ffffff;
         }
         .kardex-col-box {
             border-right: 1px solid #000;
-            padding: 5px;
+            padding: 8px 5px;
             display: flex;
             flex-direction: column;
             gap: 6px;
@@ -116,20 +118,21 @@
         .kardex-item-row {
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px dashed #aaa;
             padding-bottom: 2px;
         }
         .kardex-promedio-sidebar {
-            width: 150px;
+            width: 140px;
             background-color: #008000;
             color: white;
             text-align: center;
             border-left: 1px solid #000;
             display: flex;
             flex-direction: column;
+            flex-shrink: 0;
         }
         .kardex-promedio-title {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             padding: 6px;
             border-bottom: 1px solid #000;
@@ -141,26 +144,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 36px;
+            font-size: 38px;
             font-weight: bold;
         }
         @media (max-width: 768px) {
-            .kardex-student-grid, .kardex-stats-container, .kardex-columns-data-grid {
-                grid-template-columns: 1fr;
-            }
-            .kardex-stats-container {
-                flex-direction: column;
-            }
-            .kardex-promedio-sidebar {
-                width: 100%;
-                border-left: none;
-                border-top: 1px solid #000;
-                height: 100px;
-            }
-            .kardex-col-box {
-                border-right: none;
-                border-bottom: 1px solid #000;
-            }
+            .kardex-student-grid { grid-template-columns: 1fr; }
+            .kardex-stats-container { flex-direction: column; }
+            .kardex-columns-data-grid { grid-template-columns: 1fr; }
+            .kardex-col-box { border-right: none; border-bottom: 1px solid #000; }
+            .kardex-promedio-sidebar { width: 100%; border-left: none; border-top: 1px solid #000; height: 90px; }
         }
     </style>
 </head>
@@ -259,4 +251,5 @@
                         <table class="teschi-table-official">
                             <thead>
                                 <tr>
+                                    <th class="col-num">N°</th>
                                     
