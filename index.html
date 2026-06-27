@@ -55,36 +55,37 @@
             </div>
             
             <div class="sidebar-user-info">
-                <p class="user-matricula-display">2025452046</p>
+                <p class="user-matricula-display" id="user-matricula">2025452046</p>
                 <div class="divider-line"></div>
                 <p class="user-name-display">YOVANI VÁZQUEZ GUZMÁN</p>
                 <p class="user-career-display">INGENIERÍA EN SISTEMAS COMPUTACIONALES</p>
                 <p class="user-semester-display">2do Semestre — Regular</p>
             </div>
 
+            <!-- BOTONES CON NAVEGACIÓN DE PESTAÑAS -->
             <nav class="sidebar-menu">
-                <button class="menu-btn" onclick="navegarALink('tab-registro')">Registro</button>
+                <button class="menu-btn" data-tab="tab-registro">Registro</button>
                 
                 <div class="submenu-container">
-                    <button class="menu-btn active" id="btn-reportes-main" onclick="conmutarReportes()">Reportes</button>
+                    <button class="menu-btn active" id="btn-reportes-main">Reportes</button>
                     <div class="submenu-content" id="reportes-submenu">
-                        <button class="submenu-item active" id="sub-item-parciales" onclick="navegarASubmenu('tab-parciales', this)">▸ Calificaciones Parciales</button>
-                        <button class="submenu-item" onclick="navegarASubmenu('tab-finales', this)">▸ Calificaciones Finales</button>
-                        <button class="submenu-item" onclick="navegarASubmenu('tab-historial', this)">▸ Historial Académico</button>
-                        <button class="submenu-item" onclick="navegarASubmenu('tab-tira', this)">▸ Tira de materia</button>
+                        <button class="submenu-item active" data-tab="tab-parciales">▸ Calificaciones Parciales</button>
+                        <button class="submenu-item" data-tab="tab-finales">▸ Calificaciones Finales</button>
+                        <button class="submenu-item" data-tab="tab-historial">▸ Historial Académico</button>
+                        <button class="submenu-item" data-tab="tab-tira">▸ Tira de materia</button>
                     </div>
                 </div>
 
-                <button class="menu-btn" onclick="navegarALink('tab-usuario')">Usuario</button>
-                <button class="menu-btn logout-style" onclick="cerrarSesionPortal()">Salir</button>
+                <button class="menu-btn" data-tab="tab-usuario">Usuario</button>
+                <button id="logout-btn" class="menu-btn logout-style">Salir</button>
             </nav>
         </aside>
 
-        <!-- PANEL DE INFORMACIÓN CENTRAL -->
+        <!-- PANEL DE INFORMACIÓN CENTRAL (CONTENEDOR BLANCO) -->
         <main class="teschi-main-panel">
             <div class="white-content-box">
                 
-                <!-- SECCIÓN: REGISTRO -->
+                <!-- SECCIÓN: REGISTRO (PÁGINA EN BLANCO) -->
                 <div id="tab-registro" class="tab-content hidden"></div>
 
                 <!-- SUB-SECCIÓN: CALIFICACIONES PARCIALES -->
@@ -133,58 +134,23 @@
                     <p style="color: #64748b; font-style: italic; margin-top: 15px;">Carga académica vigente autorizada para el periodo 2026-1.</p>
                 </div>
 
-                <!-- SECCIÓN: USUARIO -->
+                <!-- SECCIÓN: USUARIO (INFORMACIÓN ANTERIOR SENCILLA) -->
                 <div id="tab-usuario" class="tab-content hidden">
-                    <div class="boleta-header-box">
-                        Actualización de datos personales
+                    <div class="boleta-header-box"><span class="icon-folder">👤</span> Información General del Estudiante</div>
+                    <div class="profile-info" style="margin-top: 20px; line-height: 1.8; font-size: 14px; color: #334155;">
+                        <p><strong>Nombre Completo:</strong> Yovani Vázquez Guzmán</p>
+                        <p><strong>Matrícula Escolar:</strong> 2025452046</p>
+                        <p><strong>Carrera Universitaria:</strong> Ingeniería en Sistemas Computacionales</p>
+                        <p><strong>Semestre Actual:</strong> 2do Semestre</p>
+                        <p><strong>Estatus del Alumno:</strong> Regular</p>
                     </div>
+                </div>
 
-                    <form class="teschi-form-datos" onsubmit="event.preventDefault();">
-                        <h3 class="form-section-title">Alumno</h3>
-                        <div class="form-grid-3">
-                            <div class="f-group">
-                                <label>Nombre</label>
-                                <input type="text" value="YOVANI">
-                            </div>
-                            <div class="f-group">
-                                <label>Apellido Paterno</label>
-                                <input type="text" value="VAZQUEZ">
-                            </div>
-                            <div class="f-group">
-                                <label>Apellido Materno</label>
-                                <input type="text" value="GUZMAN">
-                            </div>
-                        </div>
+            </div>
+        </main>
 
-                        <div class="form-grid-3">
-                            <div class="f-group">
-                                <label>CURP</label>
-                                <input type="text" value="VAGY051124HDFZZRA0">
-                            </div>
-                            <div class="f-group">
-                                <label>R.F.C.</label>
-                                <input type="text" value="VAGY051124">
-                            </div>
-                            <div class="f-group">
-                                <label>Entidad de nacimiento</label>
-                                <select><option>OAXACA</option></select>
-                            </div>
-                        </div>
+    </div>
 
-                        <div class="form-grid-3">
-                            <div class="f-group">
-                                <label>Teléfono</label>
-                                <input type="text" value="5618481012">
-                            </div>
-                            <div class="f-group">
-                                <label>Celular</label>
-                                <input type="text" value="5618481012">
-                            </div>
-                            <div class="f-group">
-                                <label>Fecha de nacimiento</label>
-                                <input type="text" value="24/11/2005 12:00:00 a. m.">
-                            </div>
-                        </div>
-
-                        <div class="form-grid-3">
-                            
+    <script src="script.js"></script>
+</body>
+</html>
