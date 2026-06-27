@@ -1,10 +1,10 @@
-// Base de datos de acceso autorizada
+// Base de datos simulada del estudiante
 const USUARIO_VALIDO = {
     matricula: "2025452046",
     password: "alumno123"
 };
 
-// Matriz de materias oficiales del SIIA
+// Tus 7 materias oficiales
 const MATERIAS_DATA = [
     { num: 1, docente: "GARDUÑO FLORES FRANCISCO ADRIÁN", materia: "FUNDAMENTOS DE PROGRAMACIÓN", p1: 70, p2: 70, p3: 95, grupo: "1ISC21" },
     { num: 2, docente: "RAMIREZ HIDALGO JUAN ALBERTO", materia: "ÁLGEBRA LINEAL", p1: 71, p2: 86, p3: 95, grupo: "2ISC11" },
@@ -15,92 +15,92 @@ const MATERIAS_DATA = [
     { num: 7, docente: "SOLIS PEREZ SHARON", materia: "QUÍMICA", p1: 95, p2: 95, p3: 85, grupo: "2ISC11" }
 ];
 
-// FUNCIÓN GLOBAL INVOCADA POR EL BOTÓN DIRECTAMENTE
-function intentarAccederAlSIIA() {
-    const inputMatricula = document.getElementById('matricula').value.trim();
-    const inputPassword = document.getElementById('password').value;
-    const loginError = document.getElementById('login-error');
+const loginForm = document.getElementById('login-form');
+const loginPageContainer = document.getElementById('login-page-container');
+const dashboardContainer = document.getElementById('dashboard-container');
+const loginError = document.getElementById('login-error');
+const gradesTableBody = document.getElementById('grades-table-body');
+const logoutBtn = document.getElementById('logout-btn');
 
-    if (inputMatricula === USUARIO_VALIDO.matricula && inputPassword === USUARIO_VALIDO.password) {
-        // Acceso aprobado: Cambiar visibilidad de paneles
-        document.getElementById('login-page-container').classList.add('hidden');
-        document.getElementById('dashboard-container').classList.remove('hidden');
-        
-        // Desplegar menú de reportes y activar pestaña de parciales por defecto
-        document.getElementById('reportes-submenu').classList.remove('hidden');
-        resetearEstilosMenu();
-        
-        document.getElementById('btn-reportes-main').classList.add('active');
-        
-        const subPar = document.getElementById('sub-item-parciales');
-        if (subPar) subPar.classList.add('active');
-        
-        mostrarSeccionContenido('tab-parciales');
-        construirTablaGrd();
-        if (loginError) loginError.textContent = "";
-    } else {
-        // Acceso rechazado
-        if (loginError) {
+const btnReportesMain = document.getElementById('btn-reportes-main');
+const reportesSubmenu = document.getElementById('reportes-submenu');
+
+// Manejador del Inicio de Sesión
+if (loginForm) {
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        const matriculaIngresada = document.getElementById('matricula').value.trim();
+        const passwordIngresada = document.getElementById('password').value;
+
+        if (matriculaIngresada === USUARIO_VALIDO.matricula && passwordIngresada === USUARIO_VALIDO.password) {
+            loginPageContainer.classList.add('hidden');
+            dashboardContainer.classList.remove('hidden');
+            
+            // Abre el submenú de Reportes por defecto al entrar
+            reportesSubmenu.classList.remove('hidden');
+            activarContenidoCentral('tab-parciales');
+            cargarCalificaciones();
+        } else {
             loginError.textContent = "Matrícula o contraseña incorrectas. Inténtalo de nuevo.";
         }
+    });
+}
+
+// INTERACCIÓN DE BOTONES PRINCIPALES (Registro, Reportes, Usuario)
+const mainButtons = document.querySelectorAll('.sidebar-menu .menu-btn:not(#logout-btn)');
+const submenuItems = document.querySelectorAll('.submenu-item');
+
+mainButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        mainButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Si se hace clic en Reportes principal
+        if (this.id === 'btn-reportes-main') {
+            reportesSubmenu.classList.toggle('hidden');
+            
+            if (!reportesSubmenu.classList.contains('hidden')) {
+                submenuItems.forEach(item => item.classList.remove('active'));
+                if (submenuItems.length > 0) {
+                    submenuItems[0].classList.add('active');
+                }
+                activarContenidoCentral('tab-parciales');
+            }
+        } else {
+            // Si hace clic en Registro o Usuario externo
+            reportesSubmenu.classList.add('hidden');
+            const targetTabId = this.getAttribute('data-tab');
+            activarContenidoCentral(targetTabId);
+        }
+    });
+});
+
+// INTERACCIÓN DE LAS OPCIONES INTERNAS DE REPORTES
+submenuItems.forEach(item => {
+    item.addEventListener('click', function() {
+        submenuItems.forEach(si => si.classList.remove('active'));
+        this.classList.add('active');
+        
+        const targetTabId = this.getAttribute('data-tab');
+        activarContenidoCentral(targetTabId);
+    });
+});
+
+// Alternar visibilidad de las capas centrales
+function activarContenidoCentral(tabId) {
+    const allTabs = document.querySelectorAll('.tab-content');
+    allTabs.forEach(tab => tab.classList.add('hidden'));
+    
+    const targetTab = document.getElementById(tabId);
+    if (targetTab) {
+        targetTab.classList.remove('hidden');
     }
 }
 
-// Navegación principal de la barra lateral verde
-function navegarALink(tabId) {
-    document.getElementById('reportes-submenu').classList.add('hidden');
-    resetearEstilosMenu();
-    if (window.event && window.event.currentTarget) {
-        window.event.currentTarget.classList.add('active');
-    }
-    mostrarSeccionContenido(tabId);
-}
-
-// Conmutar apertura/cierre de la pestaña de Reportes
-function conmutarReportes() {
-    const submenu = document.getElementById('reportes-submenu');
-    submenu.classList.toggle('hidden');
-    
-    resetearEstilosMenu();
-    document.getElementById('btn-reportes-main').classList.add('active');
-    
-    const subPar = document.getElementById('sub-item-parciales');
-    if (subPar) subPar.classList.add('active');
-    
-    mostrarSeccionContenido('tab-parciales');
-    construirTablaGrd();
-}
-
-// Seleccionar un sub-element dentro del acordeón de reportes
-function navegarASubmenu(tabId, element) {
-    const subItems = document.querySelectorAll('.submenu-item');
-    subItems.forEach(item => item.classList.remove('active'));
-    if (element) element.classList.add('active');
-    
-    resetearEstilosMenu();
-    document.getElementById('btn-reportes-main').classList.add('active');
-    
-    mostrarSeccionContenido(tabId);
-}
-
-function resetearEstilosMenu() {
-    const btns = document.querySelectorAll('.menu-btn');
-    btns.forEach(b => b.classList.remove('active'));
-    const subItems = document.querySelectorAll('.submenu-item');
-    subItems.forEach(s => s.classList.remove('active'));
-}
-
-function mostrarSeccionContenido(tabId) {
-    const tabs = document.querySelectorAll('.tab-content');
-    tabs.forEach(t => t.classList.add('hidden'));
-    const target = document.getElementById(tabId);
-    if (target) target.classList.remove('hidden');
-}
-
-function construirTablaGrd() {
-    const tbody = document.getElementById('grades-table-body');
-    if (!tbody) return;
-    tbody.innerHTML = "";
+// Construir boleta del TESCHI
+function cargarCalificaciones() {
+    if (!gradesTableBody) return;
+    gradesTableBody.innerHTML = ""; 
     MATERIAS_DATA.forEach(row => {
         const fila = document.createElement('tr');
         fila.innerHTML = `
@@ -112,15 +112,16 @@ function construirTablaGrd() {
             <td class="center-text">${row.p3}</td>
             <td class="center-text font-small">${row.grupo}</td>
         `;
-        tbody.appendChild(fila);
+        gradesTableBody.appendChild(fila);
     });
 }
 
-function cerrarSesionPortal() {
-    document.getElementById('dashboard-container').classList.add('hidden');
-    document.getElementById('login-page-container').classList.remove('hidden');
-    document.getElementById('matricula').value = "";
-    document.getElementById('password').value = "";
-    const loginError = document.getElementById('login-error');
-    if (loginError) loginError.textContent = "";
+// Botón de Salir
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', function() {
+        dashboardContainer.classList.add('hidden');
+        loginPageContainer.classList.remove('hidden');
+        loginForm.reset();
+        loginError.textContent = "";
+    });
 }
