@@ -1,7 +1,7 @@
 // Base de datos simulada del estudiante
 const USUARIO_VALIDO = {
     matricula: "2025452046",
-    password: "123"
+    password: "1123"
 };
 
 // Tus 7 materias con los docentes, calificaciones y grupos exactos de tu imagen
@@ -35,6 +35,7 @@ loginForm.addEventListener('submit', function(e) {
         loginPageContainer.classList.add('hidden');
         dashboardContainer.classList.remove('hidden');
         
+        // Comportamiento inicial correcto: abrir menú de reportes y cargar parciales
         reportesSubmenu.classList.remove('hidden');
         activarContenidoCentral('tab-parciales');
         cargarCalificaciones();
@@ -43,9 +44,9 @@ loginForm.addEventListener('submit', function(e) {
     }
 });
 
-// INTERACCIÓN DE BOTONES PRINCIPALES
+// INTERACCIÓN DE BOTONES PRINCIPALES (Registro, Reportes, Usuario)
 const mainButtons = document.querySelectorAll('.sidebar-menu > .menu-btn:not(#logout-btn)');
-const submenuItems = document.querySelectorAll('.submenu-item');
+const submenuItems = document.querySelectorAll('.submenu-content .submenu-item');
 
 mainButtons.forEach(button => {
     button.addEventListener('click', function() {
@@ -53,8 +54,10 @@ mainButtons.forEach(button => {
         this.classList.add('active');
         
         if (this.id === 'btn-reportes-main') {
+            // Alterna la visibilidad del submenú
             reportesSubmenu.classList.toggle('hidden');
             
+            // Si se abrió, activa por defecto la primera opción de la lista
             if (!reportesSubmenu.classList.contains('hidden')) {
                 submenuItems.forEach(item => item.classList.remove('active'));
                 if (submenuItems.length > 0) {
@@ -63,6 +66,7 @@ mainButtons.forEach(button => {
                 activarContenidoCentral('tab-parciales');
             }
         } else {
+            // Si hace clic en Registro o Usuario, oculta Reportes automáticamente
             reportesSubmenu.classList.add('hidden');
             const targetTabId = this.getAttribute('data-tab');
             activarContenidoCentral(targetTabId);
@@ -81,6 +85,7 @@ submenuItems.forEach(item => {
     });
 });
 
+// Cambiar visibilidad de las ventanas de información de forma limpia
 function activarContenidoCentral(tabId) {
     const allTabs = document.querySelectorAll('.tab-content');
     allTabs.forEach(tab => tab.classList.add('hidden'));
@@ -91,8 +96,9 @@ function activarContenidoCentral(tabId) {
     }
 }
 
-// Renderizar la tabla con la estructura institucional exacta
+// Renderizar la tabla con los datos del SIIA
 function cargarCalificaciones() {
+    if (!gradesTableBody) return;
     gradesTableBody.innerHTML = ""; 
     MATERIAS_DATA.forEach(row => {
         const fila = document.createElement('tr');
@@ -109,6 +115,7 @@ function cargarCalificaciones() {
     });
 }
 
+// Botón de Cerrar Sesión
 logoutBtn.addEventListener('click', function() {
     dashboardContainer.classList.add('hidden');
     loginPageContainer.classList.remove('hidden');
