@@ -1,7 +1,7 @@
 // Base de datos de acceso autorizada
 const USUARIO_VALIDO = {
     matricula: "2025452046",
-    password: "1223"
+    password: "alumno123"
 };
 
 // Matriz de materias oficiales del SIIA
@@ -15,60 +15,63 @@ const MATERIAS_DATA = [
     { num: 7, docente: "SOLIS PEREZ SHARON", materia: "QUÍMICA", p1: 95, p2: 95, p3: 85, grupo: "2ISC11" }
 ];
 
-// PROCESO DE LOGUEO DIRECTO (SIN DOMCONTENTLOADED)
-const loginForm = document.getElementById('login-form');
+// FUNCIÓN GLOBAL INVOCADA POR EL BOTÓN DIRECTAMENTE
+function intentarAccederAlSIIA() {
+    const inputMatricula = document.getElementById('matricula').value.trim();
+    const inputPassword = document.getElementById('password').value;
+    const loginError = document.getElementById('login-error');
 
-if (loginForm) {
-    loginForm.addEventListener('submit', function(e) {
-        e.preventDefault();
+    if (inputMatricula === USUARIO_VALIDO.matricula && inputPassword === USUARIO_VALIDO.password) {
+        // Acceso aprobado: Cambiar visibilidad de paneles
+        document.getElementById('login-page-container').classList.add('hidden');
+        document.getElementById('dashboard-container').classList.remove('hidden');
         
-        const inputMatricula = document.getElementById('matricula').value.trim();
-        const inputPassword = document.getElementById('password').value;
-
-        if (inputMatricula === USUARIO_VALIDO.matricula && inputPassword === USUARIO_VALIDO.password) {
-            // Ocultar login y mostrar dashboard
-            document.getElementById('login-page-container').classList.add('hidden');
-            document.getElementById('dashboard-container').classList.remove('hidden');
-            
-            // Configurar menú inicial
-            document.getElementById('reportes-submenu').classList.remove('hidden');
-            resetearEstilosMenu();
-            
-            document.getElementById('btn-reportes-main').classList.add('active');
-            document.getElementById('sub-item-parciales').classList.add('active');
-            
-            mostrarSeccionContenido('tab-parciales');
-            construirTablaGrd();
-        } else {
-            document.getElementById('login-error').textContent = "Matrícula o contraseña incorrectas. Inténtalo de nuevo.";
+        // Desplegar menú de reportes y activar pestaña de parciales por defecto
+        document.getElementById('reportes-submenu').classList.remove('hidden');
+        resetearEstilosMenu();
+        
+        document.getElementById('btn-reportes-main').classList.add('active');
+        
+        const subPar = document.getElementById('sub-item-parciales');
+        if (subPar) subPar.classList.add('active');
+        
+        mostrarSeccionContenido('tab-parciales');
+        construirTablaGrd();
+        if (loginError) loginError.textContent = "";
+    } else {
+        // Acceso rechazado
+        if (loginError) {
+            loginError.textContent = "Matrícula o contraseña incorrectas. Inténtalo de nuevo.";
         }
-    });
+    }
 }
 
-// Navegación principal lateral
+// Navegación principal de la barra lateral verde
 function navegarALink(tabId) {
     document.getElementById('reportes-submenu').classList.add('hidden');
     resetearEstilosMenu();
-    if (event && event.currentTarget) {
-        event.currentTarget.classList.add('active');
+    if (window.event && window.event.currentTarget) {
+        window.event.currentTarget.classList.add('active');
     }
     mostrarSeccionContenido(tabId);
 }
 
-// Clic al menú raíz Reportes
+// Conmutar apertura/cierre de la pestaña de Reportes
 function conmutarReportes() {
     const submenu = document.getElementById('reportes-submenu');
     submenu.classList.toggle('hidden');
     
     resetearEstilosMenu();
     document.getElementById('btn-reportes-main').classList.add('active');
-    document.getElementById('sub-item-parciales').classList.add('active');
+    
+    const subPar = document.getElementById('sub-item-parciales');
+    if (subPar) subPar.classList.add('active');
     
     mostrarSeccionContenido('tab-parciales');
     construirTablaGrd();
 }
 
-// Clic a las subopciones de Reportes
+// Seleccionar un sub-element dentro del acordeón de reportes
 function navegarASubmenu(tabId, element) {
     const subItems = document.querySelectorAll('.submenu-item');
     subItems.forEach(item => item.classList.remove('active'));
@@ -116,6 +119,8 @@ function construirTablaGrd() {
 function cerrarSesionPortal() {
     document.getElementById('dashboard-container').classList.add('hidden');
     document.getElementById('login-page-container').classList.remove('hidden');
-    document.getElementById('login-form').reset();
-    document.getElementById('login-error').textContent = "";
+    document.getElementById('matricula').value = "";
+    document.getElementById('password').value = "";
+    const loginError = document.getElementById('login-error');
+    if (loginError) loginError.textContent = "";
 }
