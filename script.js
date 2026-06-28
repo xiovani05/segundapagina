@@ -23,6 +23,26 @@ const gradesTableBody = document.getElementById('grades-table-body');
 const logoutBtn = document.getElementById('logout-btn');
 const reportesSubmenu = document.getElementById('reportes-submenu');
 
+// 1. COMPROBACIÓN AUTOMÁTICA AL RECARGAR LA PÁGINA
+window.addEventListener('load', function() {
+    const sesionGuardada = localStorage.getItem('sesion_activa_teschi');
+    if (sesionGuardada === 'true') {
+        // Si la sesión existe en el celular, salta el login automáticamente
+        if (loginPageContainer) loginPageContainer.classList.add('hidden');
+        if (dashboardContainer) dashboardContainer.classList.remove('hidden');
+        if (reportesSubmenu) reportesSubmenu.classList.remove('hidden');
+        
+        // Simular activación visual del menú
+        resetearEstilosMenu();
+        const btnRepMain = document.getElementById('btn-reportes-main');
+        if (btnRepMain) btnRepMain.classList.add('active');
+        if (submenuItems.length > 0) submenuItems[0].classList.add('active');
+        
+        activarContenidoCentral('tab-parciales');
+        cargarCalificaciones();
+    }
+});
+
 // Manejador del Inicio de Sesión
 if (loginForm) {
     loginForm.addEventListener('submit', function(e) {
@@ -31,6 +51,9 @@ if (loginForm) {
         const passwordIngresada = document.getElementById('password').value;
 
         if (matriculaIngresada === USUARIO_VALIDO.matricula && passwordIngresada === USUARIO_VALIDO.password) {
+            // 2. GUARDAR ESTADO DE LA SESIÓN AL ENTRAR CON ÉXITO
+            localStorage.setItem('sesion_activa_teschi', 'true');
+
             loginPageContainer.classList.add('hidden');
             dashboardContainer.classList.remove('hidden');
             
@@ -77,6 +100,11 @@ submenuItems.forEach(item => {
         activarContenidoCentral(targetTabId);
     });
 });
+
+function resetearEstilosMenu() {
+    mainButtons.forEach(b => b.classList.remove('active'));
+    submenuItems.forEach(s => s.classList.remove('active'));
+}
 
 function activarContenidoCentral(tabId) {
     const allTabs = document.querySelectorAll('.tab-content');
@@ -132,9 +160,12 @@ function cargarCalificaciones() {
 
 if (logoutBtn) {
     logoutBtn.addEventListener('click', function() {
+        // 3. BORRAR LA MEMORIA AL CERRAR SESIÓN VOLUNTARIAMENTE
+        localStorage.removeItem('sesion_activa_teschi');
+
         dashboardContainer.classList.add('hidden');
         loginPageContainer.classList.remove('hidden');
         loginForm.reset();
         loginError.textContent = "";
     });
-}
+                                      }
