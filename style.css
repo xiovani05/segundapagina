@@ -405,10 +405,15 @@ body {
 }
 
 .login-footer-image {
+    .login-footer-image {
     width: 100%;
     max-width: 90px;
     height: auto;
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: transparent; /* 👈 Hace invisible el fondo blanco */
+    border-radius: 0px;            /* 👈 Quita el redondeado innecesario */
+    box-shadow: none;              /* 👈 Elimina la sombra que la hace resaltar */
+    mix-blend-mode: multiply;      /* 👈 Truco digital para fusionar los tonos verdes */
+    
+    
 }
 
